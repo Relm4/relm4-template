@@ -2,26 +2,20 @@ use gio::prelude::*;
 use gtk::prelude::*;
 use std::env;
 
-use crate::window::Window;
 use crate::config::APP_ID;
-
+use crate::window::Window;
 
 pub struct Application {
     app: gtk::Application,
-    window: Window
+    window: Window,
 }
 
 impl Application {
-
     pub fn new() -> Self {
-        let app = gtk::Application::new(APP_ID,
-                                        gio::ApplicationFlags::FLAGS_NONE).unwrap();
+        let app = gtk::Application::new(APP_ID, gio::ApplicationFlags::FLAGS_NONE).unwrap();
         let window = Window::new();
 
-        let application = Self {
-            app,
-            window
-        };
+        let application = Self { app, window };
 
         application.setup_signals();
         application
@@ -40,5 +34,4 @@ impl Application {
         let args: Vec<String> = env::args().collect();
         self.app.run(&args);
     }
-
 }
