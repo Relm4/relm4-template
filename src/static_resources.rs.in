@@ -6,7 +6,7 @@ use glib::Bytes;
 pub(crate) fn init() -> Result<(), Error> {
     // load the gresource binary at build time and include/link it into the final
     // binary.
-    let res_bytes = include_bytes!("/var/home/bilelmussaoui/gtk-rust-template/_build/data/resources.gresource");
+    let res_bytes = include_bytes!(@RESOURCEFILE@);
 
 
 

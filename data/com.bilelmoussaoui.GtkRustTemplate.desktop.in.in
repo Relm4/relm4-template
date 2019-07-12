@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=GTK Rust Template
+GenericName=GTK Rust Template
+Comment=A GTK + Rust application boilerplate template
+Type=Application
+Exec=gtk-rust-template
+Terminal=false
+Categories=GNOME;GTK;
+Keywords=Gnome;GTK;
+# Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+Icon=@icon@
+StartupNotify=true

@@ -1,6 +1,6 @@
 project('gtk-rs-template', 
         'rust',
-        version: '0.1'
+        version: '0.0.1',
         licence: 'MIT')
 
 
@@ -54,7 +54,7 @@ subdir('src')
 
 meson.add_dist_script(
   'build-aux/dist-vendor.sh',
-  join_paths(meson.build_root(), 'meson-dist', meson.project_name() + '-' + shortwave_version),
+  join_paths(meson.build_root(), 'meson-dist', meson.project_name() + '-' + version),
   meson.source_root()
 )
 

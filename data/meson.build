@@ -29,9 +29,10 @@ endif
 # Appdata
 appdata_conf = configuration_data()
 appdata_conf.set('appid', application_id)
+appdata_conf.set('gettext-package', gettext_package)
 appdata_file = i18n.merge_file (
   input: configure_file(
-    input: 'com.bilelmoussaoui.GtkRustTemplate.appdata.in.in',
+    input: 'com.bilelmoussaoui.GtkRustTemplate.appdata.xml.in.in',
     output: '@BASENAME@',
     configuration: appdata_conf
   ),
@@ -62,3 +63,32 @@ configure_file(
     install: true,
     install_dir: datadir / 'glib-2.0' / 'schemas'
 )
+
+
+
+
+ui_config = configuration_data()
+ui_config.set('app-id', application_id)
+ui_config.set('version', meson.project_version() + version_suffix)
+ui_preconfigured_files = files(
+  'resources/ui/about_dialog.ui.in',
+  'resources/ui/window.ui.in',
+)
+ui_dependencies = []
+foreach ui_file: ui_preconfigured_files
+  ui_dependencies += configure_file(
+    input:  ui_file,
+    output: '@BASENAME@',
+    configuration: ui_config
+  )
+endforeach
+
+resources = gnome.compile_resources(
+  'resources',
+  'resources.gresource.xml',
+  gresource_bundle: true,
+  source_dir: meson.current_build_dir(),
+  dependencies: ui_dependencies
+)
+
+

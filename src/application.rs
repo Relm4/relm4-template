@@ -3,6 +3,7 @@ use gtk::prelude::*;
 use std::env;
 
 use crate::window::Window;
+use crate::config::APP_ID;
 
 
 pub struct Application {
@@ -13,9 +14,8 @@ pub struct Application {
 impl Application {
 
     pub fn new() -> Self {
-        let app = gtk::Application::new("com.github.bilelmoussaoui.gtk-rs-app-boilerplate", 
+        let app = gtk::Application::new(APP_ID,
                                         gio::ApplicationFlags::FLAGS_NONE).unwrap();
-
         let window = Window::new();
 
         let application = Self {
