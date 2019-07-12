@@ -11,13 +11,10 @@
   </description>
   <screenshots>
       <screenshot type="default">
-        <image width="465" height="617">https://gitlab.gnome.org/World/Authenticator/raw/master/data/screenshots/screenshot1.png</image>
-        <caption>Main Window - empty state</caption>
+        <image>https://gitlab.gnome.org/bilelmoussaoui/gtk-rust-template/raw/master/data/resources/screenshots/screenshots/screenshot1.png</image>
+        <caption>Main Window</caption>
       </screenshot>
-      <screenshot>
-        <image width="464" height="612">https://gitlab.gnome.org/World/Authenticator/raw/master/data/screenshots/screenshot2.png</image>
-        <caption>Add a new account</caption>
-      </screenshot>
+
   </screenshots>
   <url type="homepage">https://gitlab.gnome.org/bilelmoussaoui/gtk-rust-template</url>
   <url type="bugtracker">https://gitlab.gnome.org/bilelmoussaoui/gtk-rust-template/issues</url>

@@ -207,7 +207,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "gtk-rust-template"
+name = "gtk-rs-app-boilerplate"
 version = "0.1.0"
 dependencies = [
  "gio 0.6.0 (registry+https://github.com/rust-lang/crates.io-index)",

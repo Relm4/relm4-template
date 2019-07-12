@@ -4,3 +4,4 @@ _build/
 build-aux/app
 src/config.rs
 src/static_resources.rs
+*.ui.in~

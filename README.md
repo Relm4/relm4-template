@@ -1,6 +1,8 @@
 # Gtk + Rust + Meson + Flatpak = <3
 
 A boilerplate template to get started with GTK, Rust, Meson, Flatpak made for GNOME. It can be adapted for other desktop environements like elementary.
+![Main Window](data/resources/screenshots/screenshot1.png "Main Window")
+
 
 ## What does it contains?
     - A simple window with a headerbar

@@ -18,6 +18,7 @@ impl Application {
         let application = Self { app, window };
 
         application.setup_signals();
+        application.setup_css();
         application
     }
 
@@ -28,6 +29,13 @@ impl Application {
             app.add_window(&window);
             window.present();
         });
+    }
+
+    pub fn setup_css(&self) {
+        let p = gtk::CssProvider::new();
+        gtk::CssProvider::load_from_resource(&p, "/com/bilelmoussaoui/GtkRustTemplate/style.css");
+        gtk::StyleContext::add_provider_for_screen(&gdk::Screen::get_default().unwrap(), &p, 500);
+
     }
 
     pub fn run(&self) {

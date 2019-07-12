@@ -12,7 +12,6 @@ impl Window {
         let builder = gtk::Builder::new_from_resource("/com/bilelmoussaoui/GtkRustTemplate/window.ui");
 
         let window_widget: gtk::ApplicationWindow = builder.get_object("window").unwrap();
-
         let headerbar: gtk::HeaderBar = builder.get_object("headerbar").unwrap();
 
         let window = Window {
@@ -29,6 +28,6 @@ impl Window {
     }
 
     pub fn init(&self) {
-        self.headerbar.set_title("Fairy Tail");
+
     }
 }

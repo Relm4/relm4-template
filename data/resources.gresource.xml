@@ -3,6 +3,6 @@
   <gresource prefix="/com/bilelmoussaoui/GtkRustTemplate/">
       <file compressed="true" preprocess="xml-stripblanks" alias="window.ui">window.ui</file>
 
-      <file compressed="true">resources/style.css</file>
+      <file compressed="true" alias="style.css">resources/style.css</file>
   </gresource>
 </gresources>
