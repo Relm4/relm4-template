@@ -1,0 +1,44 @@
+include: 'https://gitlab.gnome.org/GNOME/citemplates/raw/master/flatpak/flatpak_ci_initiative.yml'
+stages:
+  - lint
+  - test
+  - review
+
+variables:
+    BUNDLE: "gtk-rust-template-nightly.flatpak"
+
+flatpak:
+    image: "registry.gitlab.gnome.org/gnome/gnome-runtime-images/rust_bundle:master"
+    variables:
+        MANIFEST_PATH: "build-aux/com.bilelmoussaoui.GtkRustTemplateDevel.json"
+        FLATPAK_MODULE: "gtk-rust-template"
+        MESON_ARGS: "-Dprofile=development"
+        RUNTIME_REPO: "https://sdk.gnome.org/gnome-nightly.flatpakrepo"
+        APP_ID: "com.bilelmoussaoui.GtkRustTemplateDevel"
+    extends: .flatpak
+
+review:
+    stage: deploy
+    dependencies:
+        - 'flatpak'
+    extends: '.review'
+
+stop_review:
+    stage: deploy
+    extends: '.stop_review'
+
+# Configure and run rustfmt
+# Exits and builds fails if on bad format
+rustfmt:
+  image: "rust:slim"
+  stage: "lint"
+  script:
+    - rustup component add rustfmt
+    # Create blank versions of our configured files
+    # so rustfmt does not yell about non-existent files or completely empty files
+    - echo -e "" >> podcasts-gtk/src/config.rs
+    - echo -e "" >> podcasts-gtk/src/static_resource.rs
+    - rustc -Vv && cargo -Vv
+    - cargo fmt --version
+    - cargo fmt --all -- --color=always --check
+
