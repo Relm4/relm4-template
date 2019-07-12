@@ -2,3 +2,5 @@ target/
 build/
 _build/
 build-aux/app
+src/config.rs
+src/static_resources.rs
