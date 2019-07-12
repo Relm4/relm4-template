@@ -36,8 +36,8 @@ rustfmt:
     - rustup component add rustfmt
     # Create blank versions of our configured files
     # so rustfmt does not yell about non-existent files or completely empty files
-    - echo -e "" >> podcasts-gtk/src/config.rs
-    - echo -e "" >> podcasts-gtk/src/static_resource.rs
+    - echo -e "" >> src/config.rs
+    - echo -e "" >> src/static_resources.rs
     - rustc -Vv && cargo -Vv
     - cargo fmt --version
     - cargo fmt --all -- --color=always --check
