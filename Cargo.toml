@@ -9,3 +9,5 @@ gtk = { version="0.6.0", features=["v3_22"] }
 glib = "0.7"
 gio = { version="0.6.0", features=["v2_46"] }
 gdk = "0.10.0"
+log = "0.4"
+
