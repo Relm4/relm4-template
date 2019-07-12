@@ -11,13 +11,13 @@ minor_version = version_array[1].to_int()
 version_micro = version_array[2].to_int()
 
 prefix = get_option('prefix')
-bindir = join_paths(prefix, get_option('bindir'))
-localedir = join_paths(prefix, get_option('localedir'))
+bindir = prefix / get_option('bindir')
+localedir = prefix / get_option('localedir')
 
-datadir = get_option('datadir')
-pkgdatadir = join_paths(datadir, meson.project_name())
-icondir = join_paths(datadir, 'icons')
-podir = join_paths (meson.source_root (), 'po')
+datadir = prefix / get_option('datadir')
+pkgdatadir = datadir / meson.project_name()
+iconsdir = datadir / 'icons'
+podir =meson.source_root () / 'po'
 gettext_package = meson.project_name()
 
 
@@ -54,7 +54,7 @@ subdir('src')
 
 meson.add_dist_script(
   'build-aux/dist-vendor.sh',
-  join_paths(meson.build_root(), 'meson-dist', meson.project_name() + '-' + version),
+  meson.build_root() / 'meson-dist' / meson.project_name() + '-' + version,
   meson.source_root()
 )
 

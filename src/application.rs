@@ -72,7 +72,6 @@ impl Application {
         let p = gtk::CssProvider::new();
         gtk::CssProvider::load_from_resource(&p, "/com/bilelmoussaoui/GtkRustTemplate/style.css");
         gtk::StyleContext::add_provider_for_screen(&gdk::Screen::get_default().unwrap(), &p, 500);
-
     }
 
     pub fn run(&self) {

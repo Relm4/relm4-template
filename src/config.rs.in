@@ -3,3 +3,5 @@ pub static PKGDATADIR: &'static str = @PKGDATADIR@;
 pub static PROFILE: &'static str = @PROFILE@;
 pub static NAME_SUFFIX: &'static str = @NAME_SUFFIX@;
 pub static VERSION: &'static str = @VERSION@;
+pub static GETTEXT_PACKAGE: &'static str = @GETTEXT_PACKAGE@;
+pub static LOCALEDIR: &'static str = @LOCALEDIR@;

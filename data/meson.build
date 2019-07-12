@@ -64,9 +64,7 @@ configure_file(
     install_dir: datadir / 'glib-2.0' / 'schemas'
 )
 
-
-
-
+# Resources
 ui_config = configuration_data()
 ui_config.set('app-id', application_id)
 ui_config.set('version', meson.project_version() + version_suffix)
@@ -90,5 +88,4 @@ resources = gnome.compile_resources(
   source_dir: meson.current_build_dir(),
   dependencies: ui_dependencies
 )
-
 
