@@ -1,0 +1,10 @@
+[package]
+name = "gtk-rust-template"
+version = "0.1.0"
+authors = ["Bilal Elmoussaoui <bil.elmoussaoui@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+gtk = { version="0.6.0", features=["v3_22"] }
+glib = "0.7"
+gio = { version="0.6.0", features=["v2_46"] }

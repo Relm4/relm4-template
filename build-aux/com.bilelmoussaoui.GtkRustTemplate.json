@@ -1,0 +1,46 @@
+{
+    "app-id": "com.bilelmoussaoui.GtkRustTemplate",
+    "runtime" : "org.gnome.Platform",
+    "runtime-version" : "3.32",
+    "sdk" : "org.gnome.Sdk",
+    "sdk-extensions" : [
+        "org.freedesktop.Sdk.Extension.rust-stable"
+    ],
+    "command" : "gtk-rust-template",
+    "finish-args" : [
+        "--filesystem=xdg-run/dconf",
+        "--filesystem=~/.config/dconf:ro",
+        "--filesystem=xdg-music",
+        "--talk-name=ca.desrt.dconf",
+        "--env=DCONF_USER_CONFIG_DIR=.config/dconf",
+        "--share=ipc",
+        "--socket=x11",
+        "--socket=wayland",
+        "--device=dri"
+    ],
+    "build-options" : {
+        "append-path" : "/usr/lib/sdk/rust-stable/bin",
+        "build-args" : [
+            "--share=network"
+        ],
+        "env" : {
+            "RUSTFLAGS" : "--remap-path-prefix =../ --error-format=short",
+            "CARGO_HOME" : "/run/build/GtkRustTemplate/cargo",
+            "RUST_BACKTRACE" : "1",
+            "RUST_LOG" : "gtk-rust-template=debug"
+        }
+    },
+    "modules" : [
+        {
+            "name" : "gtk-rust-template",
+            "buildsystem" : "meson",
+            "sources" : [
+                {
+                    "type" : "git",
+                    "url" : "https://gitlab.gnome.org/bilelmoussaoui/gtk-rust-template.git"
+                }
+            ]
+        }
+    ]
+}
+
