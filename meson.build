@@ -1,7 +1,7 @@
 project('gtk-rs-template', 
         'rust',
         version: '0.0.1',
-        licence: 'MIT')
+        license: 'MIT')
 
 
 version = meson.project_version()
