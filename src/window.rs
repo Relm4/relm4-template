@@ -3,7 +3,6 @@ use gtk::prelude::*;
 use crate::config::{APP_ID, PROFILE};
 use crate::window_state;
 
-
 pub struct Window {
     pub widget: gtk::ApplicationWindow,
     appmenu_button: gtk::MenuButton,
@@ -19,7 +18,6 @@ impl Window {
         if PROFILE == "Devel" {
             window_widget.get_style_context().add_class("devel");
         }
-
 
         let window = Window {
             widget: window_widget,
@@ -43,6 +41,5 @@ impl Window {
             window_state::save(&window, &settings);
             Inhibit(false)
         });
-
     }
 }

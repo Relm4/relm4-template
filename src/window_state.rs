@@ -1,7 +1,6 @@
 use gio::prelude::SettingsExt;
 use gtk::prelude::GtkWindowExt;
 
-
 pub fn load(window: &gtk::ApplicationWindow, settings: &gio::Settings) {
     let width = settings.get_int("window-width");
     let height = settings.get_int("window-height");
@@ -33,4 +32,3 @@ pub fn save(window: &gtk::ApplicationWindow, settings: &gio::Settings) {
     settings.set_int("window-x", position.0);
     settings.set_int("window-y", position.1);
 }
-
