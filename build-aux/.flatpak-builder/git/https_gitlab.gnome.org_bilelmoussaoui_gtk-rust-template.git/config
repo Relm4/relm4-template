@@ -1,9 +1,0 @@
-[core]
-	repositoryformatversion = 0
-	filemode = true
-	bare = true
-[remote "origin"]
-	url = https://gitlab.gnome.org/bilelmoussaoui/gtk-rust-template.git
-	fetch = +refs/*:refs/*
-[transfer]
-	fsckObjects = 1
