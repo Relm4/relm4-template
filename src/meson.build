@@ -40,7 +40,8 @@ sources = files(
     'config.rs',
     'main.rs',
     'static_resources.rs',
-    'window.rs'
+    'window.rs',
+    'window_state.rs',
 )
 
 cargo_release = custom_target('cargo-build',

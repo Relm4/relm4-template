@@ -67,7 +67,6 @@ impl Application {
         self.app.add_action(&simple_action);
     }
 
-
     pub fn setup_css(&self) {
         let p = gtk::CssProvider::new();
         gtk::CssProvider::load_from_resource(&p, "/com/bilelmoussaoui/GtkRustTemplate/style.css");

@@ -1,7 +1,7 @@
 project('gtk-rs-template', 
         'rust',
         version: '0.0.1',
-        licence: 'MIT')
+        license: 'MIT')
 
 
 version = meson.project_version()
@@ -57,5 +57,12 @@ meson.add_dist_script(
   meson.build_root() / 'meson-dist' / meson.project_name() + '-' + version,
   meson.source_root()
 )
+
+if get_option('profile') == 'development'
+    # Setup pre-commit hook for ensuring coding style is always consistent
+    message('Setting up git pre-commit hook..')
+    run_command('cp', '-f', 'hooks/pre-commit.hook', '.git/hooks/pre-commit')
+endif
+
 
 meson.add_install_script('build-aux/meson_post_install.py')

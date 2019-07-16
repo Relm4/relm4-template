@@ -8,8 +8,6 @@ pub(crate) fn init() -> Result<(), Error> {
     // binary.
     let res_bytes = include_bytes!(@RESOURCEFILE@);
 
-
-
     // Create Resource it will live as long the value lives.
     let gbytes = Bytes::from_static(res_bytes.as_ref());
     let resource = Resource::new_from_data(&gbytes)?;
