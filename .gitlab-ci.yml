@@ -8,7 +8,7 @@ variables:
     BUNDLE: "gtk-rust-template-nightly.flatpak"
 
 flatpak:
-    image: "registry.gitlab.gnome.org/gnome/gnome-runtime-images/rust_bundle:master"
+    image: "registry.gitlab.gnome.org/gnome/gnome-runtime-images/rust_bundle:3.32"
     variables:
         MANIFEST_PATH: "build-aux/com.bilelmoussaoui.GtkRustTemplateDevel.json"
         FLATPAK_MODULE: "gtk-rust-template"

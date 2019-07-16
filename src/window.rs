@@ -1,7 +1,8 @@
-use gio::prelude::*;
 use gtk::prelude::*;
 
 use crate::config::{APP_ID, PROFILE};
+use crate::window_state;
+
 
 pub struct Window {
     pub widget: gtk::ApplicationWindow,
@@ -25,33 +26,23 @@ impl Window {
             appmenu_button: appmenu_btn,
         };
 
-        window.init(&settings);
+        window.init(settings);
         window
     }
 
-    pub fn init(&self, settings: &gio::Settings) {
+    pub fn init(&self, settings: gio::Settings) {
+        // setup app menu
         let menu_builder = gtk::Builder::new_from_resource("/com/bilelmoussaoui/GtkRustTemplate/menu.ui");
         let popover_menu: gtk::PopoverMenu = menu_builder.get_object("popover_menu").unwrap();
         self.appmenu_button.set_popover(Some(&popover_menu));
+        // load latest window state
+        window_state::load(&self.widget, &settings);
+
+        // save window state on delete event
         self.widget.connect_delete_event(move |window, _| {
-
-            let position = self.widget.get_position();
-            let size = self.widget.get_size();
-            /*
-            let window_position: glib::Variant = position.to_variant();
-            let window_size: glib::Variant = size.to_variant();
-
-            settings.set_value("window-position", window_position);
-            settings.set_value("window-size", window_size);
-            */
-            settings.set_boolean("is-maximized", window.is_maximized());
-
+            window_state::save(&window, &settings);
+            Inhibit(false)
         });
-
-        // load default position
-        if settings.get_boolean("is-maximized") {
-            self.widget.maximize();
-        }
 
     }
 }

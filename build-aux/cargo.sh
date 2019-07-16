@@ -10,7 +10,7 @@ if [[ $5 = "Devel" ]]
 then
     echo "DEBUG MODE"
     cargo build --manifest-path \
-        "$MESON_SOURCE_ROOT"/Cargo.toml && \
+        "$MESON_SOURCE_ROOT"/Cargo.toml --verbose && \
         cp "$CARGO_TARGET_DIR"/debug/gtk-rust-template $3
 else
     echo "RELEASE MODE"
