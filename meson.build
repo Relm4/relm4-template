@@ -52,7 +52,6 @@ subdir('data')
 
 cargo = find_program('cargo', required: false)
 gresource = find_program('glib-compile-resources', required: true)
-cargo_vendor = find_program('cargo-vendor', required: false)
 cargo_script = find_program('build-aux/cargo.sh')
 
 subdir('src')
