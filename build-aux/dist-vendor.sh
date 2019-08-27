@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 export DIST="$1"
 export SOURCE_ROOT="$2"
 
