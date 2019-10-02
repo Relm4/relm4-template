@@ -1,7 +1,8 @@
 project('gtk-rs-template', 
         'rust',
         version: '0.0.1',
-        license: 'MIT')
+        license: 'MIT',
+	meson_version : '>= 0.50')
 
 dependency('glib-2.0', version: '>= 2.56')
 dependency('gio-2.0', version: '>= 2.56')
