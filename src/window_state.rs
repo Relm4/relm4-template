@@ -20,15 +20,17 @@ pub fn load(window: &gtk::ApplicationWindow, settings: &gio::Settings) {
     }
 }
 
-pub fn save(window: &gtk::ApplicationWindow, settings: &gio::Settings) {
+pub fn save(window: &gtk::ApplicationWindow, settings: &gio::Settings) -> Result<(), glib::BoolError> {
     let size = window.get_size();
     let position = window.get_position();
 
-    settings.set_int("window-width", size.0);
-    settings.set_int("window-height", size.1);
+    settings.set_int("window-width", size.0)?;
+    settings.set_int("window-height", size.1)?;
 
-    settings.set_boolean("is-maximized", window.is_maximized());
+    settings.set_boolean("is-maximized", window.is_maximized())?;
 
-    settings.set_int("window-x", position.0);
-    settings.set_int("window-y", position.1);
+    settings.set_int("window-x", position.0)?;
+    settings.set_int("window-y", position.1)?;
+
+    Ok(())
 }

@@ -10,10 +10,10 @@ flatpak:
     image: "registry.gitlab.gnome.org/gnome/gnome-runtime-images/rust_bundle:master"
     stage: "test"
     variables:
-        MANIFEST_PATH: "build-aux/com.bilelmoussaoui.GtkRustTemplateDevel.json"
+        MANIFEST_PATH: "build-aux/com.belmoussaoui.GtkRustTemplateDevel.json"
         FLATPAK_MODULE: "gtk-rust-template"
         MESON_ARGS: "-Dprofile=development"
-        APP_ID: "com.bilelmoussaoui.GtkRustTemplateDevel"
+        APP_ID: "com.belmoussaoui.GtkRustTemplateDevel"
 
     script:
         - flatpak-builder --stop-at=${FLATPAK_MODULE} app ${MANIFEST_PATH}
@@ -21,8 +21,18 @@ flatpak:
         - flatpak-builder --run app ${MANIFEST_PATH} meson --prefix=/app ${MESON_ARGS} _build
         - flatpak-builder --run app ${MANIFEST_PATH} ninja -C _build install
 
-        # Create a flatpak bundle
+        # Run the tests
         - flatpak-builder --finish-only app ${MANIFEST_PATH}
+        - >
+          xvfb-run -a -s "-screen 0 1024x768x24"
+          flatpak build
+          --env=LANG=C.UTF-8
+          --env=NO_AT_BRIDGE=1
+          app
+          dbus-run-session
+          meson test -C _build --no-stdsplit --print-errorlogs
+
+        # Create a flatpak bundle
         - flatpak build-export repo app
         - flatpak build-bundle repo ${BUNDLE} ${APP_ID}
 

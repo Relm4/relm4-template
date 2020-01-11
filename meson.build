@@ -1,13 +1,26 @@
-project('gtk-rs-template', 
+project('gtk-rust-template',
         'rust',
         version: '0.0.1',
         license: 'MIT',
 	meson_version : '>= 0.50')
 
+i18n = import('i18n')
+gnome = import('gnome')
+
+base_id = 'com.belmoussaoui.GtkRustTemplate'
+
 dependency('glib-2.0', version: '>= 2.56')
 dependency('gio-2.0', version: '>= 2.56')
 dependency('gdk-pixbuf-2.0')
 dependency('gtk+-3.0', version: '>= 3.24.7')
+
+
+glib_compile_resources = find_program('glib-compile-resources', required: true)
+glib_compile_schemas = find_program('glib-compile-schemas', required: true)
+desktop_file_validate = find_program('desktop-file-validate', required: false)
+appstream_util = find_program('appstream-util', required: false)
+cargo = find_program('cargo', required: false)
+cargo_script = find_program('build-aux/cargo.sh')
 
 
 version = meson.project_version()
@@ -42,20 +55,8 @@ else
   version_suffix = ''
 endif
 
-application_id = 'com.bilelmoussaoui.GtkRustTemplate@0@'.format(profile)
+application_id = '@0@@1@'.format(base_id, profile)
 
-
-i18n = import('i18n')
-gnome = import('gnome')
-
-subdir('po')
-subdir('data')
-
-cargo = find_program('cargo', required: false)
-gresource = find_program('glib-compile-resources', required: true)
-cargo_script = find_program('build-aux/cargo.sh')
-
-subdir('src')
 
 meson.add_dist_script(
   'build-aux/dist-vendor.sh',
@@ -69,5 +70,8 @@ if get_option('profile') == 'development'
     run_command('cp', '-f', 'hooks/pre-commit.hook', '.git/hooks/pre-commit')
 endif
 
+subdir('data')
+subdir('po')
+subdir('src')
 
 meson.add_install_script('build-aux/meson_post_install.py')

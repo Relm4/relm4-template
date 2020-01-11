@@ -1,5 +1,5 @@
 {
-"app-id": "com.bilelmoussaoui.GtkRustTemplateDevel",
+    "app-id": "com.belmoussaoui.GtkRustTemplateDevel",
     "runtime" : "org.gnome.Platform",
     "runtime-version" : "master",
     "sdk" : "org.gnome.Sdk",
@@ -14,11 +14,10 @@
     "finish-args" : [
         "--filesystem=xdg-run/dconf",
         "--filesystem=~/.config/dconf:ro",
-        "--filesystem=xdg-music",
         "--talk-name=ca.desrt.dconf",
         "--env=DCONF_USER_CONFIG_DIR=.config/dconf",
         "--share=ipc",
-        "--socket=x11",
+        "--socket=fallback-x11",
         "--socket=wayland",
         "--device=dri"
     ],
