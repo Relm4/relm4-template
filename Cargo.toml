@@ -5,9 +5,9 @@ authors = ["Bilal Elmoussaoui <bil.elmoussaoui@gmail.com>"]
 edition = "2018"
 
 [dependencies]
-gtk = { version = "0.6.0", features = ["v3_22"] }
-glib = "0.7"
-gio = { version = "0.6.0", features = ["v2_46"] }
-gdk = "0.10.0"
+gtk = { version = "0.8", features = ["v3_22"] }
+glib = "0.9"
+gio = { version = "0.8", features = ["v2_46"] }
+gdk = "0.12"
 log = "0.4"
-gettext-rs= { version = "0.4.1", features = ["gettext-system"] }
+gettext-rs= { version = "0.4", features = ["gettext-system"] }

@@ -1,11 +1,12 @@
 #[macro_use]
 extern crate log;
-
-extern crate gio;
+#[macro_use]
 extern crate glib;
-extern crate gtk;
 
 use gettextrs::*;
+
+#[macro_use]
+mod utils;
 
 mod application;
 mod config;
@@ -17,11 +18,15 @@ use application::Application;
 use config::{GETTEXT_PACKAGE, LOCALEDIR};
 
 fn main() {
-    gtk::init().expect("Unable to start GTK3");
     // Prepare i18n
     setlocale(LocaleCategory::LcAll, "");
     bindtextdomain(GETTEXT_PACKAGE, LOCALEDIR);
     textdomain(GETTEXT_PACKAGE);
+
+    glib::set_application_name(&format!("GtkRustTemplate{}", config::NAME_SUFFIX));
+    glib::set_prgname(Some("rust-gtk-template"));
+
+    gtk::init().expect("Unable to start GTK3");
 
     static_resources::init().expect("Failed to initialize the resource file.");
 
