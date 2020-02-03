@@ -27,7 +27,7 @@
             "--share=network"
         ],
         "env" : {
-            "RUSTFLAGS" : "--remap-path-prefix =../ --error-format=human",
+            "RUSTFLAGS" : "--remap-path-prefix =../",
             "CARGO_HOME" : "/run/build/GtkRustTemplate/cargo",
             "RUST_BACKTRACE" : "1",
             "RUST_LOG" : "rust-gtk-template=debug"
