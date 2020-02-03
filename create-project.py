@@ -55,6 +55,11 @@ TO_RENAME = [
     "data/com.belmoussaoui.GtkRustTemplate.metainfo.xml.in.in",
 ]
 
+TO_REMOVE = [
+    'create-project.py'
+]
+
+
 app_path = "/" + "/".join(app_id.split(".")) + "/"
 project_dir = os.path.join(ABS_PATH, project_name)
 
@@ -93,6 +98,9 @@ for file in TO_RENAME:
         project_dir, file.replace(CURRENT_APP_ID, app_id))
     shutil.move(current_path, new_path)
 
+for file in TO_REMOVE:
+    current_path = os.path.join(project_dir, file)
+    os.remove(current_path)
 
 subprocess.call(['git', 'checkout', '--orphan', 'newBranch'], cwd=project_dir)
 # Add all files and commit them
