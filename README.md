@@ -6,7 +6,7 @@ A boilerplate template to get started with GTK, Rust, Meson, Flatpak made for GN
 ![Main Window](data/resources/screenshots/screenshot1.png "Main Window")
 </div>
 
-## What does it contains?
+### What does it contains?
 
 - A simple window with a headerbar
 - Bunch of useful files that you SHOULD ship with your application on Linux:
@@ -23,6 +23,27 @@ A boilerplate template to get started with GTK, Rust, Meson, Flatpak made for GN
 - Gitlab CI to produce flatpak nightlies
 - i18n support
 
+### How to init a project ?
+
+The template ships a simple python script to init a project easily. It asks you a few questions and replaces & renames all the necessary files.
+
+The script requires having `git` installed on your system.
+
+You can run it with,
+```
+python3 create-project.py
+```
+
+```
+➜ python3 create-project.py
+Welcome to GTK Rust Template
+Name: Contrast
+Project Name : contrast
+Application ID (see: https://developer.gnome.org/ChooseApplicationID/): org.gnome.design.Contrast
+Author: Bilal Elmoussaoui
+Email: bil.elmoussaoui@gmail.com
+Github/Gitlab repository: https://gitlab.gnome.org/World/design/contrast/
+```
 
 ## Credits
 - [Podcasts](https://gitlab.gnome.org/World/podcasts)

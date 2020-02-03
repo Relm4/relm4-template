@@ -1,6 +1,5 @@
 [Desktop Entry]
 Name=GTK Rust Template
-GenericName=GTK Rust Template
 Comment=A GTK + Rust application boilerplate template
 Type=Application
 Exec=gtk-rust-template

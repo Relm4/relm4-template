@@ -1,7 +1,6 @@
-data/com.belmoussaoui.GtkRustTemplate.metainfo.xml.in.in
-data/com.belmoussaoui.GtkRustTemplate.desktop.in.in
-data/com.belmoussaoui.GtkRustTemplate.gschema.xml.in
 data/resources/ui/about_dialog.ui.in
-data/resources/ui/menu.ui
 data/resources/ui/shortcuts.ui
 data/resources/ui/window.ui.in
+data/com.belmoussaoui.GtkRustTemplate.desktop.in.in
+data/com.belmoussaoui.GtkRustTemplate.gschema.xml.in
+data/com.belmoussaoui.GtkRustTemplate.metainfo.xml.in.in
