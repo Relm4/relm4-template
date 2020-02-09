@@ -88,6 +88,7 @@ for file in FILES:
         content = content.replace(CURRENT_PROJECT_NAME, project_name)
         content = content.replace(CURRENT_NAME, name)
         content = content.replace(CURRENT_AUTHOR, author)
+        content = content.replace(CURRENT_EMAIL, update_contact)
 
     with open(current_path, 'w') as handle:
         handle.write(content)
