@@ -13,7 +13,7 @@ impl Window {
     pub fn new() -> Self {
         let settings = gio::Settings::new(APP_ID);
 
-        let builder = gtk::Builder::new_from_resource("/com/belmoussaoui/GtkRustTemplate/window.ui");
+        let builder = gtk::Builder::from_resource("/com/belmoussaoui/GtkRustTemplate/window.ui");
         get_widget!(builder, gtk::ApplicationWindow, window);
 
         let window_widget = Window { widget: window, builder, settings };
