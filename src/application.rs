@@ -25,7 +25,7 @@ impl Application {
     }
 
     fn setup_widgets(&self) {
-        let builder = gtk::Builder::new_from_resource("/com/belmoussaoui/GtkRustTemplate/shortcuts.ui");
+        let builder = gtk::Builder::from_resource("/com/belmoussaoui/GtkRustTemplate/shortcuts.ui");
         get_widget!(builder, gtk::ShortcutsWindow, shortcuts);
         self.window.widget.set_help_overlay(Some(&shortcuts));
     }
@@ -46,11 +46,11 @@ impl Application {
             self.app,
             "about",
             clone!(@weak self.window.widget as window => move |_, _| {
-                let builder = gtk::Builder::new_from_resource("/com/belmoussaoui/GtkRustTemplate/about_dialog.ui");
+                let builder = gtk::Builder::from_resource("/com/belmoussaoui/GtkRustTemplate/about_dialog.ui");
                 get_widget!(builder, gtk::AboutDialog, about_dialog);
                 about_dialog.set_transient_for(Some(&window));
 
-                about_dialog.connect_response(|dialog, _| dialog.destroy());
+                about_dialog.connect_response(|dialog, _| dialog.close());
                 about_dialog.show();
 
             })
