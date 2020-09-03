@@ -14,7 +14,7 @@ app_id = input(
     "Application ID (see: https://developer.gnome.org/ChooseApplicationID/): ")
 author = input("Author: ")
 update_contact = input("Email: ")
-project_repo = input("Github/Gitlab repository: ")
+project_repo = input("Github/Gitlab repository: ").rstrip('/')
 
 
 REPO_URL = "https://gitlab.gnome.org/bilelmoussaoui/gtk-rust-template.git"
