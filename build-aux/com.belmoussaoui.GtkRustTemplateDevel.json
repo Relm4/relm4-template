@@ -24,9 +24,7 @@
         ],
         "env" : {
             "RUSTFLAGS" : "--remap-path-prefix =../",
-            "CARGO_HOME" : "/run/build/GtkRustTemplate/cargo",
-            "RUST_BACKTRACE" : "1",
-            "RUST_LOG" : "gtk-rust-template=debug"
+            "CARGO_HOME" : "/run/build/GtkRustTemplate/cargo"
         }
     },
     "modules" : [
