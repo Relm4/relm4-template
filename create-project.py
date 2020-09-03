@@ -44,6 +44,7 @@ FILES = [
     "Cargo.toml",
     "meson.build",
     "meson_options.txt",
+    "LICENSE.md",
     ".gitlab-ci.yml"
 ]
 
