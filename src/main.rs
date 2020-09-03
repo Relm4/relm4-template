@@ -9,7 +9,9 @@ use gettextrs::*;
 mod utils;
 
 mod application;
+#[rustfmt::skip]
 mod config;
+#[rustfmt::skip]
 mod static_resources;
 mod window;
 mod window_state;
