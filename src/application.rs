@@ -70,7 +70,7 @@ impl Application {
         let p = gtk::CssProvider::new();
         gtk::CssProvider::load_from_resource(&p, "/com/belmoussaoui/GtkRustTemplate/style.css");
         if let Some(screen) = gdk::Screen::get_default() {
-            gtk::StyleContext::add_provider_for_screen(&screen, &p, 500);
+            gtk::StyleContext::add_provider_for_screen(&screen, &p, gtk::STYLE_PROVIDER_PRIORITY_APPLICATION);
         }
     }
 
