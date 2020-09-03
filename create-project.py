@@ -109,7 +109,7 @@ subprocess.call(['git', 'checkout', '--orphan', 'newBranch'], cwd=project_dir)
 # Add all files and commit them
 subprocess.call(['git', 'add', '-A'], cwd=project_dir)
 subprocess.call(
-    ['git', 'commit', '-m', '"Init with GTK Rust Template"'], cwd=project_dir)
+    ['git', 'commit', '-m', 'Init with GTK Rust Template'], cwd=project_dir)
 # Deletes the master branch
 subprocess.call(['git', 'branch', '-D', 'master'], cwd=project_dir)
 # Rename the current branch to master
