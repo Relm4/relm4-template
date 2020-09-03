@@ -17,7 +17,6 @@
   </screenshots>
   <url type="homepage">https://gitlab.gnome.org/bilelmoussaoui/gtk-rust-template</url>
   <url type="bugtracker">https://gitlab.gnome.org/bilelmoussaoui/gtk-rust-template/issues</url>
-  <url type="donation">https://liberapay.com/bielmoussaoui</url>
   <content_rating type="oars-1.0" />
   <releases>
     <release version="0.0.1" date="2019-07-11" />
