@@ -75,7 +75,7 @@ impl Application {
     }
 
     pub fn run(&self) {
-        info!("GtkRustTemplate{} ({})", config::NAME_SUFFIX, config::APP_ID);
+        info!("GTK Rust Template{} ({})", config::NAME_SUFFIX, config::APP_ID);
         info!("Version: {} ({})", config::VERSION, config::PROFILE);
         info!("Datadir: {}", config::PKGDATADIR);
 
