@@ -17,7 +17,6 @@ update_contact = input("Email: ")
 project_repo = input("Github/Gitlab repository: ").rstrip('/')
 
 
-REPO_URL = "https://gitlab.gnome.org/bilelmoussaoui/gtk-rust-template.git"
 CURRENT_APP_ID = "com.belmoussaoui.GtkRustTemplate"
 CURRENT_PROJECT_NAME = "gtk-rust-template"
 CURRENT_NAME = "GTK Rust Template"
@@ -78,7 +77,7 @@ if os.path.isdir(project_dir):
         exit()
 
 subprocess.call(['git', 'clone', '--depth', '1',
-                 REPO_URL, project_name], cwd=ABS_PATH)
+                 '.', project_name], cwd=ABS_PATH)
 
 for file in FILES:
     current_path = os.path.join(project_dir, file)
