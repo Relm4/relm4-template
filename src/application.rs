@@ -55,7 +55,7 @@ impl Application {
 
             })
         );
-        self.app.set_accels_for_action("win.show-help-overlay", &["<primary>comma"]);
+        self.app.set_accels_for_action("win.show-help-overlay", &["<primary>question"]);
     }
 
     fn setup_signals(&self) {
