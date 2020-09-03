@@ -5,7 +5,6 @@ use crate::window_state;
 
 pub struct Window {
     pub widget: gtk::ApplicationWindow,
-    builder: gtk::Builder,
     settings: gio::Settings,
 }
 
@@ -16,7 +15,7 @@ impl Window {
         let builder = gtk::Builder::from_resource("/com/belmoussaoui/GtkRustTemplate/window.ui");
         get_widget!(builder, gtk::ApplicationWindow, window);
 
-        let window_widget = Window { widget: window, builder, settings };
+        let window_widget = Window { widget: window, settings };
 
         window_widget.init();
         window_widget
