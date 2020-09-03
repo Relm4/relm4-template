@@ -62,7 +62,7 @@ impl Application {
         self.app.connect_activate(clone!(@weak self.window.widget as window => move |app| {
             window.set_application(Some(app));
             app.add_window(&window);
-            window.present();
+            window.show_all();
         }));
     }
 
