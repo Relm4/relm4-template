@@ -2,7 +2,7 @@ subdir('icons')
 # Desktop file
 desktop_conf = configuration_data()
 desktop_conf.set('icon', application_id)
-desktop_file = i18n.merge_file (
+desktop_file = i18n.merge_file(
   type: 'desktop',
   input: configure_file(
     input: '@0@.desktop.in.in'.format(base_id),
@@ -29,7 +29,7 @@ endif
 appdata_conf = configuration_data()
 appdata_conf.set('app-id', application_id)
 appdata_conf.set('gettext-package', gettext_package)
-appdata_file = i18n.merge_file (
+appdata_file = i18n.merge_file(
   input: configure_file(
     input: '@0@.metainfo.xml.in.in'.format(base_id),
     output: '@BASENAME@',
@@ -55,11 +55,11 @@ gschema_conf = configuration_data()
 gschema_conf.set('app-id', application_id)
 gschema_conf.set('gettext-package', gettext_package)
 configure_file(
-    input: '@0@.gschema.xml.in'.format(base_id),
-    output: '@0@.gschema.xml'.format(application_id),
-    configuration: gschema_conf,
-    install: true,
-    install_dir: datadir / 'glib-2.0' / 'schemas'
+  input: '@0@.gschema.xml.in'.format(base_id),
+  output: '@0@.gschema.xml'.format(application_id),
+  configuration: gschema_conf,
+  install: true,
+  install_dir: datadir / 'glib-2.0' / 'schemas'
 )
 
 # Validata GSchema
@@ -83,7 +83,7 @@ ui_preconfigured_files = files(
 ui_dependencies = []
 foreach ui_file: ui_preconfigured_files
   ui_dependencies += configure_file(
-    input:  ui_file,
+    input: ui_file,
     output: '@BASENAME@',
     configuration: ui_config
   )
@@ -96,4 +96,3 @@ resources = gnome.compile_resources(
   source_dir: meson.current_build_dir(),
   dependencies: ui_dependencies
 )
-

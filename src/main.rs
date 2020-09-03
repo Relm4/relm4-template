@@ -9,7 +9,9 @@ use gettextrs::*;
 mod utils;
 
 mod application;
+#[rustfmt::skip]
 mod config;
+#[rustfmt::skip]
 mod static_resources;
 mod window;
 mod window_state;
@@ -24,7 +26,7 @@ fn main() {
     textdomain(GETTEXT_PACKAGE);
 
     glib::set_application_name(&format!("GTK Rust Template{}", config::NAME_SUFFIX));
-    glib::set_prgname(Some("rust-gtk-template"));
+    glib::set_prgname(Some("gtk-rust-template"));
 
     gtk::init().expect("Unable to start GTK3");
 

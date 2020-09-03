@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import os
 import subprocess
 import shutil
@@ -6,16 +8,15 @@ import shutil
 ABS_PATH = os.path.dirname(os.path.realpath(__file__))
 
 print("Welcome to GTK Rust Template")
-name = input("Name: ")
-project_name = input("Project Name : ")
+name = input("Name (e.g. My Awesome App): ")
+project_name = input("Project Name (e.g. my-awesome-app): ")
 app_id = input(
     "Application ID (see: https://developer.gnome.org/ChooseApplicationID/): ")
 author = input("Author: ")
 update_contact = input("Email: ")
-project_repo = input("Github/Gitlab repository: ")
+project_repo = input("Github/Gitlab repository: ").rstrip('/')
 
 
-REPO_URL = "https://gitlab.gnome.org/bilelmoussaoui/gtk-rust-template.git"
 CURRENT_APP_ID = "com.belmoussaoui.GtkRustTemplate"
 CURRENT_PROJECT_NAME = "gtk-rust-template"
 CURRENT_NAME = "GTK Rust Template"
@@ -42,6 +43,7 @@ FILES = [
     "Cargo.toml",
     "meson.build",
     "meson_options.txt",
+    "LICENSE.md",
     ".gitlab-ci.yml"
 ]
 
@@ -75,7 +77,7 @@ if os.path.isdir(project_dir):
         exit()
 
 subprocess.call(['git', 'clone', '--depth', '1',
-                 REPO_URL, project_name], cwd=ABS_PATH)
+                 '.', project_name], cwd=ABS_PATH)
 
 for file in FILES:
     current_path = os.path.join(project_dir, file)
@@ -107,7 +109,7 @@ subprocess.call(['git', 'checkout', '--orphan', 'newBranch'], cwd=project_dir)
 # Add all files and commit them
 subprocess.call(['git', 'add', '-A'], cwd=project_dir)
 subprocess.call(
-    ['git', 'commit', '-m',  '"Init with GTK Rust Template"'], cwd=project_dir)
+    ['git', 'commit', '-m', 'Init with GTK Rust Template'], cwd=project_dir)
 # Deletes the master branch
 subprocess.call(['git', 'branch', '-D', 'master'], cwd=project_dir)
 # Rename the current branch to master

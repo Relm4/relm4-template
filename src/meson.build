@@ -15,7 +15,7 @@ config = configure_file(
 run_command(
   'cp',
   meson.build_root() / 'src' / 'config.rs',
-  meson.source_root() /  'src' / 'config.rs',
+  meson.source_root() / 'src' / 'config.rs',
   check: true
 )
 
@@ -40,6 +40,7 @@ sources = files(
   'config.rs',
   'main.rs',
   'static_resources.rs',
+  'utils.rs',
   'window.rs',
   'window_state.rs',
 )
@@ -62,4 +63,3 @@ custom_target(
     meson.project_name(),
   ]
 )
-

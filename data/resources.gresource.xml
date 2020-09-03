@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/com/belmoussaoui/GtkRustTemplate/">
-      <file compressed="true" preprocess="xml-stripblanks">about_dialog.ui</file>
-      <file compressed="true" preprocess="xml-stripblanks" alias="shortcuts.ui">resources/ui/shortcuts.ui</file>
-      <file compressed="true" preprocess="xml-stripblanks">window.ui</file>
+    <file compressed="true" preprocess="xml-stripblanks">about_dialog.ui</file>
+    <file compressed="true" preprocess="xml-stripblanks" alias="shortcuts.ui">resources/ui/shortcuts.ui</file>
+    <file compressed="true" preprocess="xml-stripblanks">window.ui</file>
 
-      <file compressed="true" alias="style.css">resources/style.css</file>
+    <file compressed="true" alias="style.css">resources/style.css</file>
   </gresource>
 </gresources>
