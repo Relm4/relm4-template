@@ -12,7 +12,8 @@ pub struct Application {
 
 impl Application {
     pub fn new() -> Self {
-        let app = gtk::Application::new(Some(config::APP_ID), gio::ApplicationFlags::FLAGS_NONE).unwrap();
+        let app =
+            gtk::Application::new(Some(config::APP_ID), gio::ApplicationFlags::FLAGS_NONE).unwrap();
         let window = Window::new();
 
         let application = Self { app, window };
@@ -55,27 +56,37 @@ impl Application {
 
             })
         );
-        self.app.set_accels_for_action("win.show-help-overlay", &["<primary>question"]);
+        self.app
+            .set_accels_for_action("win.show-help-overlay", &["<primary>question"]);
     }
 
     fn setup_signals(&self) {
-        self.app.connect_activate(clone!(@weak self.window.widget as window => move |app| {
-            window.set_application(Some(app));
-            app.add_window(&window);
-            window.show_all();
-        }));
+        self.app
+            .connect_activate(clone!(@weak self.window.widget as window => move |app| {
+                window.set_application(Some(app));
+                app.add_window(&window);
+                window.show_all();
+            }));
     }
 
     fn setup_css(&self) {
         let p = gtk::CssProvider::new();
         gtk::CssProvider::load_from_resource(&p, "/com/belmoussaoui/GtkRustTemplate/style.css");
         if let Some(screen) = gdk::Screen::get_default() {
-            gtk::StyleContext::add_provider_for_screen(&screen, &p, gtk::STYLE_PROVIDER_PRIORITY_APPLICATION);
+            gtk::StyleContext::add_provider_for_screen(
+                &screen,
+                &p,
+                gtk::STYLE_PROVIDER_PRIORITY_APPLICATION,
+            );
         }
     }
 
     pub fn run(&self) {
-        info!("GTK Rust Template{} ({})", config::NAME_SUFFIX, config::APP_ID);
+        info!(
+            "GTK Rust Template{} ({})",
+            config::NAME_SUFFIX,
+            config::APP_ID
+        );
         info!("Version: {} ({})", config::VERSION, config::PROFILE);
         info!("Datadir: {}", config::PKGDATADIR);
 

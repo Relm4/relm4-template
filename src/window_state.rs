@@ -20,7 +20,10 @@ pub fn load(window: &gtk::ApplicationWindow, settings: &gio::Settings) {
     }
 }
 
-pub fn save(window: &gtk::ApplicationWindow, settings: &gio::Settings) -> Result<(), glib::BoolError> {
+pub fn save(
+    window: &gtk::ApplicationWindow,
+    settings: &gio::Settings,
+) -> Result<(), glib::BoolError> {
     let size = window.get_size();
     let position = window.get_position();
 
