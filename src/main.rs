@@ -24,7 +24,7 @@ fn main() {
     textdomain(GETTEXT_PACKAGE);
 
     glib::set_application_name(&format!("GTK Rust Template{}", config::NAME_SUFFIX));
-    glib::set_prgname(Some("rust-gtk-template"));
+    glib::set_prgname(Some("gtk-rust-template"));
 
     gtk::init().expect("Unable to start GTK3");
 
