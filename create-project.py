@@ -8,8 +8,8 @@ import shutil
 ABS_PATH = os.path.dirname(os.path.realpath(__file__))
 
 print("Welcome to GTK Rust Template")
-name = input("Name: ")
-project_name = input("Project Name: ")
+name = input("Name (e.g. My Awesome App): ")
+project_name = input("Project Name (e.g. my-awesome-app): ")
 app_id = input(
     "Application ID (see: https://developer.gnome.org/ChooseApplicationID/): ")
 author = input("Author: ")
