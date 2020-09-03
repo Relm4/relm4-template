@@ -40,6 +40,7 @@ sources = files(
   'config.rs',
   'main.rs',
   'static_resources.rs',
+  'utils.rs',
   'window.rs',
   'window_state.rs',
 )
