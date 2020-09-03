@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Bilal Elmoussaoui 2019 <bilal.elmoussaoui@gnome.org> -->
+<!-- Bilal Elmoussaoui 2019 <bil.elmoussaoui@gmail.com> -->
 <component type="desktop-application">
   <id>@app-id@</id>
   <metadata_license>CC0</metadata_license>
@@ -31,7 +31,7 @@
      <kudo>HiDpiIcon</kudo>
   </kudos>
   <developer_name>Bilal Elmoussaoui</developer_name>
-  <update_contact>bilal.elmoussaoui@gnome.org</update_contact>
+  <update_contact>bil.elmoussaoui@gmail.com</update_contact>
   <translation type="gettext">@gettext-package@</translation>
   <launchable type="desktop-id">@app-id@.desktop</launchable>
 </component>
