@@ -11,16 +11,6 @@
       <summary>Default window height</summary>
       <description>Default window height</description>
     </key>
-    <key name="window-x" type="i">
-      <default>-1</default>
-      <summary>Default window x position</summary>
-      <description>Default window x position</description>
-    </key>
-    <key name="window-y" type="i">
-      <default>-1</default>
-      <summary>Default window y position</summary>
-      <description>Default window y position</description>
-    </key>
     <key name="is-maximized" type="b">
       <default>false</default>
       <summary>Default window maximized behaviour</summary>

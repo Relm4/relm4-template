@@ -1,0 +1,104 @@
+{
+    "app-id": "com.belmoussaoui.GtkRustTemplate.Devel",
+    "runtime": "org.gnome.Platform",
+    "runtime-version": "3.38",
+    "sdk": "org.gnome.Sdk",
+    "sdk-extensions": ["org.freedesktop.Sdk.Extension.rust-stable"],
+    "command": "gtk-rust-template",
+    "finish-args" : [
+        "--socket=fallback-x11",
+        "--socket=wayland",
+        "--device=dri",
+        "--talk-name=org.a11y.Bus",
+        "--env=RUST_LOG=gtk-rust-template=debug",
+        "--env=G_MESSAGES_DEBUG=none"
+    ],
+    "build-options" : {
+        "append-path" : "/usr/lib/sdk/rust-stable/bin",
+        "build-args" : [
+            "--share=network"
+        ],
+        "test-args": [
+            "--socket=x11",
+            "--share=network"
+        ],
+        "env" : {
+            "CARGO_HOME" : "/run/build/gtk-rust-template/cargo",
+            "RUST_BACKTRACE": "1",
+            "RUSTFLAGS": "-L=/app/lib"
+        }
+    },
+    "modules": [
+        {
+            "name": "gtk4",
+            "buildsystem": "meson",
+            "config-opts": [
+                "-Ddemos=false",
+                "-Dbuild-examples=false",
+                "-Dbuild-tests=false"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://download.gnome.org/sources/gtk/4.0/gtk-4.0.0.tar.xz",
+                    "sha256": "d46cf5b127ea27dd9e5d2ff6ed500cb4067eeb2cb1cd2c313ccde8013b0b9bf9"
+                }
+            ],
+            "modules": [
+                {
+                    "name": "pango",
+                    "buildsystem": "meson",
+                    "sources": [
+                        {
+                            "type": "archive",
+                            "url": "https://download.gnome.org/sources/pango/1.48/pango-1.48.0.tar.xz",
+                            "sha256": "391f26f3341c2d7053e0fb26a956bd42360dadd825efe7088b1e9340a65e74e6"
+                        }
+                    ]
+                },
+                {
+                    "name": "libsass",
+                    "sources": [
+                        {
+                            "type": "archive",
+                            "url": "https://github.com/sass/libsass/archive/3.6.4.tar.gz",
+                            "sha256": "f9484d9a6df60576e791566eab2f757a97fd414fce01dd41fc0a693ea5db2889"
+                        },
+                        {
+                            "type": "script",
+                            "dest-filename": "autogen.sh",
+                            "commands": ["autoreconf -si"]
+                        }
+                    ]
+                },
+                {
+                    "name": "sassc",
+                    "sources": [
+                        {
+                            "type": "archive",
+                            "url": "https://github.com/lazka/sassc/archive/3.6.1.tar.gz",
+                            "sha256": "8cee391c49a102b4464f86fc40c4ceac3a2ada52a89c4c933d8348e3e4542a60"
+                        },
+                        {
+                            "type": "script",
+                            "dest-filename": "autogen.sh",
+                            "commands": ["autoreconf -si"]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "gtk-rust-template",
+            "buildsystem": "meson",
+            "run-tests": true,
+            "config-opts": ["-Dprofile=development"],
+            "sources": [
+                {
+                    "type": "dir",
+                    "path": "../"
+                }
+            ]
+        }
+    ]
+}

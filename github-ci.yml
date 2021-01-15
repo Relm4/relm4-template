@@ -1,0 +1,19 @@
+on:
+  push:
+    branches: [master]
+  pull_request:
+name: CI
+jobs:
+  flatpak-builder:
+    name: "Flatpak Builder"
+    runs-on: ubuntu-20.04
+    container:
+      image: docker.io/bilelmoussaoui/flatpak-github-actions
+      options: --privileged
+    steps:
+    - uses: actions/checkout@v2
+    - uses: bilelmoussaoui/flatpak-github-actions@v2
+      with:
+        bundle: "gtk-rust-template.flatpak"
+        manifest-path: "build-aux/com.belmoussaoui.GtkRustTemplate.Devel.json"
+        run-tests: "true"
