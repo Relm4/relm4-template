@@ -1,17 +1,32 @@
-include:
-  - project: 'gnome/citemplates'
-    file: 'flatpak/flatpak-ci-initiative-sdk-extensions.yml'
+stages:
+  - check
+  - test
 
 flatpak:
   image: 'registry.gitlab.gnome.org/gnome/gnome-runtime-images/rust_bundle:3.38'
+  stage: test
+  tags:
+    - flatpak
   variables:
     BUNDLE: "gtk-rust-template-nightly.flatpak"
     MANIFEST_PATH: "build-aux/com.belmoussaoui.GtkRustTemplate.Devel.json"
     FLATPAK_MODULE: "gtk-rust-template"
-    MESON_ARGS: "-Dprofile=development"
     APP_ID: "com.belmoussaoui.GtkRustTemplate.Devel"
     RUNTIME_REPO: "https://nightly.gnome.org/gnome-nightly.flatpakrepo"
-  extends: '.flatpak'
+  script:
+    - >
+      xvfb-run -a -s "-screen 0 1024x768x24"
+      flatpak-builder --keep-build-dirs --user --disable-rofiles-fuse flatpak_app --repo=repo ${BRANCH:+--default-branch=$BRANCH} ${MANIFEST_PATH}
+    - flatpak build-bundle repo ${BUNDLE} --runtime-repo=${RUNTIME_REPO} ${APP_ID} ${BRANCH}
+  artifacts:
+    name: 'Flatpak artifacts'
+    expose_as: 'Get Flatpak bundle here'
+    when: 'always'
+    paths:
+      - "${BUNDLE}"
+      - '.flatpak-builder/build/${FLATPAK_MODULE}/_flatpak_build/meson-logs/meson-log.txt'
+      - '.flatpak-builder/build/${FLATPAK_MODULE}/_flatpak_build/meson-logs/testlog.txt'
+    expire_in: 14 days
 
 # Configure and run rustfmt
 # Exits and builds fails if on bad format
