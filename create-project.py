@@ -47,8 +47,8 @@ FILES = [
     f"{source_dir}/meson.build",
     "meson_options.txt",
     "LICENSE.md",
-    "gitlab-ci.yml",
-    "github-ci.yml",
+    "ci-gitlab.yml",
+    "ci-github.yml",
 ]
 
 TO_RENAME = [
@@ -87,11 +87,11 @@ TO_RENAME_AND_MOVE = [
         f"{project_dir}/data/resources/ui/window.ui",
     ),
     (
-        f"{project_dir}/gitlab-ci.yml",
-        f"{project_dir}/.gitlab-ci.yml",
+        f"{project_dir}/ci-gitlab.yml",
+        f"{project_dir}/.ci-gitlab.yml",
     ),
     (
-        f"{project_dir}/github-ci.yml",
+        f"{project_dir}/ci-github.yml",
         f"{project_dir}/.github/workflows/ci.yml",
     ),
 ]
@@ -118,8 +118,8 @@ folders_to_move = [
     "po",
     "meson_options.txt",
     ".editorconfig",
-    "github-ci.yml",
-    "gitlab-ci.yml",
+    "ci-github.yml",
+    "ci-gitlab.yml",
     "LICENSE.md",
     "README.md",
 ]
