@@ -76,7 +76,7 @@
                     "sources": [
                         {
                             "type": "archive",
-                            "url": "https://github.com/lazka/sassc/archive/3.6.1.tar.gz",
+                            "url": "https://github.com/sass/sassc/archive/3.6.1.tar.gz",
                             "sha256": "8cee391c49a102b4464f86fc40c4ceac3a2ada52a89c4c933d8348e3e4542a60"
                         },
                         {
