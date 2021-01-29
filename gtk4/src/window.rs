@@ -11,6 +11,7 @@ mod imp {
     use glib::subclass;
 
     #[derive(Debug, CompositeTemplate)]
+    #[template(resource = "/com/belmoussaoui/GtkRustTemplate/window.ui")]
     pub struct ExampleApplicationWindow {
         #[template_child]
         pub headerbar: TemplateChild<gtk::HeaderBar>,
@@ -21,6 +22,7 @@ mod imp {
         const NAME: &'static str = "ExampleApplicationWindow";
         type Type = super::ExampleApplicationWindow;
         type ParentType = gtk::ApplicationWindow;
+        type Interfaces = ();
         type Instance = subclass::simple::InstanceStruct<Self>;
         type Class = subclass::simple::ClassStruct<Self>;
 
@@ -34,8 +36,7 @@ mod imp {
         }
 
         fn class_init(klass: &mut Self::Class) {
-            klass.set_template_from_resource("/com/belmoussaoui/GtkRustTemplate/window.ui");
-            Self::bind_template_children(klass);
+            Self::bind_template(klass);
         }
 
         // You must call `Widget`'s `init_template()` within `instance_init()`.

@@ -24,6 +24,7 @@ mod imp {
         const NAME: &'static str = "ExampleApplication";
         type Type = super::ExampleApplication;
         type ParentType = gtk::Application;
+        type Interfaces = ();
         type Instance = subclass::simple::InstanceStruct<Self>;
         type Class = subclass::simple::ClassStruct<Self>;
 
