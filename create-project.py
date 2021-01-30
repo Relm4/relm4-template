@@ -118,6 +118,7 @@ folders_to_move = [
     "po",
     "meson_options.txt",
     ".editorconfig",
+    ".gitignore",
     "ci-github.yml",
     "ci-gitlab.yml",
     "LICENSE.md",
