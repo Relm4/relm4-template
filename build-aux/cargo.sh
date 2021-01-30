@@ -9,7 +9,7 @@ if [[ $4 = "Devel" ]]
 then
     echo "DEBUG MODE"
     cargo build --manifest-path \
-        "$MESON_SOURCE_ROOT"/Cargo.toml --verbose && \
+        "$MESON_SOURCE_ROOT"/Cargo.toml && \
         cp "$CARGO_TARGET_DIR"/debug/$5 $3
 else
     echo "RELEASE MODE"
