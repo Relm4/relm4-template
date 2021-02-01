@@ -88,7 +88,7 @@ TO_RENAME_AND_MOVE = [
     ),
     (
         f"{project_dir}/ci-gitlab.yml",
-        f"{project_dir}/.ci-gitlab.yml",
+        f"{project_dir}/.gitlab-ci.yml",
     ),
     (
         f"{project_dir}/ci-github.yml",
