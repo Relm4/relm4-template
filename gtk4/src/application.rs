@@ -123,12 +123,12 @@ impl ExampleApplication {
     }
 
     fn setup_css(&self) {
-        let p = gtk::CssProvider::new();
-        gtk::CssProvider::load_from_resource(&p, "/com/belmoussaoui/GtkRustTemplate/style.css");
+        let provider = gtk::CssProvider::new();
+        provider.load_from_resource("/com/belmoussaoui/GtkRustTemplate/style.css");
         if let Some(display) = gdk::Display::get_default() {
             gtk::StyleContext::add_provider_for_display(
                 &display,
-                &p,
+                &provider,
                 gtk::STYLE_PROVIDER_PRIORITY_APPLICATION,
             );
         }
@@ -143,8 +143,8 @@ impl ExampleApplication {
             .version(config::VERSION)
             .transient_for(&self.get_main_window())
             .modal(true)
-            .authors(vec!["Bilal Elmoussaoui".to_string()])
-            .artists(vec!["Bilal Elmoussaoui".to_string()])
+            .authors(vec!["Bilal Elmoussaoui".into()])
+            .artists(vec!["Bilal Elmoussaoui".into()])
             .build();
 
         dialog.show();
