@@ -73,6 +73,7 @@ mod imp {
 
     impl GtkApplicationImpl for ExampleApplication {}
 }
+
 glib::wrapper! {
     pub struct ExampleApplication(ObjectSubclass<imp::ExampleApplication>)
         @extends gio::Application, gtk::Application, @implements gio::ActionMap, gio::ActionGroup;
@@ -89,7 +90,7 @@ impl ExampleApplication {
 
     fn get_main_window(&self) -> ExampleApplicationWindow {
         let priv_ = imp::ExampleApplication::from_instance(self);
-        priv_.window.get().unwrap().clone().upgrade().unwrap()
+        priv_.window.get().unwrap().upgrade().unwrap()
     }
 
     fn setup_gactions(&self) {
