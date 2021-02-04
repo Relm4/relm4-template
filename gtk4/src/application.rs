@@ -7,7 +7,7 @@ use gtk::prelude::*;
 use gtk::subclass::prelude::*;
 use gtk::{gdk, gio, glib};
 use gtk_macros::action;
-use log::{debug, info, warn};
+use log::{debug, info};
 use once_cell::sync::OnceCell;
 use std::env;
 
@@ -99,10 +99,9 @@ impl ExampleApplication {
             self,
             "quit",
             clone!(@weak self as app => move |_, _| {
-                let window = app.get_main_window();
-                if let Err(err) = window.save_window_size() {
-                    warn!("Failed to save window state, {}", &err);
-                };
+                // This is needed to trigger the delete event
+                // and saving the window state
+                app.get_main_window().close();
                 app.quit();
             })
         );
