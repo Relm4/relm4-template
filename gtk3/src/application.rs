@@ -1,10 +1,11 @@
-use gio::prelude::*;
-use gtk::prelude::*;
-use gtk_macros::{action, get_widget};
-use std::env;
-
 use crate::config;
 use crate::window::Window;
+use gio::prelude::*;
+use glib::clone;
+use gtk::prelude::*;
+use gtk_macros::{action, get_widget};
+use log::info;
+use std::env;
 
 pub struct Application {
     app: gtk::Application,

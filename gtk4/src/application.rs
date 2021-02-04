@@ -1,3 +1,5 @@
+use crate::config;
+use crate::window::ExampleApplicationWindow;
 use gio::ApplicationFlags;
 use glib::clone;
 use glib::WeakRef;
@@ -5,11 +7,9 @@ use gtk::prelude::*;
 use gtk::subclass::prelude::*;
 use gtk::{gdk, gio, glib};
 use gtk_macros::action;
+use log::{debug, info, warn};
 use once_cell::sync::OnceCell;
 use std::env;
-
-use crate::config;
-use crate::window::ExampleApplicationWindow;
 
 mod imp {
     use super::*;

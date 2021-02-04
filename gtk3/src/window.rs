@@ -1,7 +1,9 @@
 use crate::config::{APP_ID, PROFILE};
 use crate::window_state;
+use glib::clone;
 use gtk::prelude::*;
 use gtk_macros::get_widget;
+use log::warn;
 
 pub struct Window {
     pub widget: gtk::ApplicationWindow,

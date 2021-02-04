@@ -1,8 +1,3 @@
-#[macro_use]
-extern crate log;
-
-use gettextrs::*;
-
 mod application;
 #[rustfmt::skip]
 mod config;
@@ -10,6 +5,7 @@ mod window;
 
 use application::ExampleApplication;
 use config::{GETTEXT_PACKAGE, LOCALEDIR, RESOURCES_FILE};
+use gettextrs::*;
 use gtk::gio;
 
 fn main() {

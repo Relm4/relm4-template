@@ -1,10 +1,10 @@
+use crate::application::ExampleApplication;
 use crate::config::{APP_ID, PROFILE};
 use glib::signal::Inhibit;
 use gtk::subclass::prelude::*;
 use gtk::{self, prelude::*};
 use gtk::{gio, glib, CompositeTemplate};
-
-use crate::application::ExampleApplication;
+use log::warn;
 
 mod imp {
     use super::*;
@@ -68,7 +68,7 @@ mod imp {
         // save window state on delete event
         fn close_request(&self, obj: &Self::Type) -> Inhibit {
             if let Err(err) = obj.save_window_size() {
-                log::warn!("Failed to save window state, {}", &err);
+                warn!("Failed to save window state, {}", &err);
             }
             Inhibit(false)
         }

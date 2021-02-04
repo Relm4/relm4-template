@@ -1,10 +1,3 @@
-#[macro_use]
-extern crate log;
-#[macro_use]
-extern crate glib;
-
-use gettextrs::*;
-
 mod application;
 #[rustfmt::skip]
 mod config;
@@ -13,6 +6,7 @@ mod window_state;
 
 use application::Application;
 use config::{GETTEXT_PACKAGE, LOCALEDIR, RESOURCES_FILE};
+use gettextrs::*;
 
 fn main() {
     pretty_env_logger::init();
