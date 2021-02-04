@@ -6,12 +6,11 @@ use gettextrs::*;
 mod application;
 #[rustfmt::skip]
 mod config;
-#[rustfmt::skip]
-mod static_resources;
 mod window;
 
 use application::ExampleApplication;
-use config::{GETTEXT_PACKAGE, LOCALEDIR};
+use config::{GETTEXT_PACKAGE, LOCALEDIR, PKGDATADIR};
+use gtk::gio;
 
 fn main() {
     // Initialize logger, debug is carried out via debug!, info!, and warn!.
@@ -27,7 +26,10 @@ fn main() {
 
     gtk::init().expect("Unable to start GTK4");
 
-    static_resources::init().expect("Failed to initialize the resource file.");
+    let res = gio::Resource::load(PKGDATADIR.to_owned() + "/resources.gresource")
+        .expect("Could not load gresource file");
+    gio::resources_register(&res);
+
 
     let app = ExampleApplication::new();
     app.run();

@@ -8,13 +8,11 @@ use gettextrs::*;
 mod application;
 #[rustfmt::skip]
 mod config;
-#[rustfmt::skip]
-mod static_resources;
 mod window;
 mod window_state;
 
 use application::Application;
-use config::{GETTEXT_PACKAGE, LOCALEDIR};
+use config::{GETTEXT_PACKAGE, LOCALEDIR, PKGDATADIR};
 
 fn main() {
     pretty_env_logger::init();
@@ -28,7 +26,9 @@ fn main() {
 
     gtk::init().expect("Unable to start GTK3");
 
-    static_resources::init().expect("Failed to initialize the resource file.");
+    let res = gio::Resource::load(PKGDATADIR.to_owned() + "/resources.gresource")
+        .expect("Could not load gresource file");
+    gio::resources_register(&res);
 
     let app = Application::new();
     app.run();

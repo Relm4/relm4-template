@@ -5,7 +5,6 @@ builddir/
 build-aux/app
 build-aux/.flatpak-builder/
 src/config.rs
-src/static_resources.rs
 *.ui.in~
 *.ui~
 
