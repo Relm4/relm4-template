@@ -40,8 +40,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/gtk/4.0/gtk-4.0.0.tar.xz",
-                    "sha256": "d46cf5b127ea27dd9e5d2ff6ed500cb4067eeb2cb1cd2c313ccde8013b0b9bf9"
+                    "url": "https://download.gnome.org/sources/gtk/4.0/gtk-4.0.3.tar.xz",
+                    "sha256": "d7c9893725790b50bd9a3bb278856d9d543b44b6b9b951d7b60e7bdecc131890"
                 }
             ],
             "modules": [
@@ -51,8 +51,8 @@
                     "sources": [
                         {
                             "type": "archive",
-                            "url": "https://download.gnome.org/sources/pango/1.48/pango-1.48.0.tar.xz",
-                            "sha256": "391f26f3341c2d7053e0fb26a956bd42360dadd825efe7088b1e9340a65e74e6"
+                            "url": "https://download.gnome.org/sources/pango/1.48/pango-1.48.1.tar.xz",
+                            "sha256": "08c2d550a96559f15fb317d7167b96df57ef743fef946f4e274bd8b6f2918058"
                         }
                     ]
                 },
