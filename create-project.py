@@ -46,7 +46,6 @@ FILES = [
     f"{source_dir}/Cargo.toml",
     f"{source_dir}/meson.build",
     "meson_options.txt",
-    "LICENSE.md",
     "ci-gitlab.yml",
     "ci-github.yml",
 ]
@@ -121,7 +120,6 @@ folders_to_move = [
     ".gitignore",
     "ci-github.yml",
     "ci-gitlab.yml",
-    "LICENSE.md",
     "README.md",
 ]
 
