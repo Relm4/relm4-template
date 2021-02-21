@@ -18,7 +18,7 @@ install_rustfmt() {
 }
 
 if ! which cargo &> /dev/null || ! cargo fmt --help &> /dev/null; then
-    echo "Unable to check Fractal’s code style, because rustfmt could not be run."
+    echo "Unable to check code style, because rustfmt could not be run."
 
     if [ ! -t 1 ]; then
         # No input is possible
