@@ -16,7 +16,7 @@ app_id = input(
 author = input("Author: ")
 update_contact = input("Email: ")
 project_repo = input("Github/Gitlab repository: ").rstrip("/")
-is_gtk4 = input("Use gtk4 [Y/n]: ").lower() == "y"
+is_gtk4 = input("Use gtk4 [Y/n]: ").lower() != "n"
 
 source_dir = "gtk4" if is_gtk4 else "gtk3"
 app_path = "/" + "/".join(app_id.split(".")) + "/"
@@ -100,10 +100,10 @@ TO_REMOVE = ["gtk3", "gtk4"]
 
 if os.path.isdir(project_dir):
     wanna_remove = ""
-    while wanna_remove.lower() not in ["y", "n"]:
-        wanna_remove = input("Project already exists, do you want to remove it? [Y/n]")
+    while wanna_remove not in ["y", "n"]:
+        wanna_remove = input("Project already exists, do you want to remove it? [Y/n]").lower()
 
-    if wanna_remove == "y":
+    if wanna_remove != "n":
         shutil.rmtree(project_dir)
     else:
         exit()
