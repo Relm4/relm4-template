@@ -8,7 +8,6 @@ use log::warn;
 
 mod imp {
     use super::*;
-    use glib::subclass;
 
     #[derive(Debug, CompositeTemplate)]
     #[template(resource = "/com/belmoussaoui/GtkRustTemplate/window.ui")]
@@ -18,15 +17,11 @@ mod imp {
         pub settings: gio::Settings,
     }
 
+    #[glib::object_subclass]
     impl ObjectSubclass for ExampleApplicationWindow {
         const NAME: &'static str = "ExampleApplicationWindow";
         type Type = super::ExampleApplicationWindow;
         type ParentType = gtk::ApplicationWindow;
-        type Interfaces = ();
-        type Instance = subclass::simple::InstanceStruct<Self>;
-        type Class = subclass::simple::ClassStruct<Self>;
-
-        glib::object_subclass!();
 
         fn new() -> Self {
             Self {
@@ -64,6 +59,7 @@ mod imp {
         }
     }
 
+    impl WidgetImpl for ExampleApplicationWindow {}
     impl WindowImpl for ExampleApplicationWindow {
         // save window state on delete event
         fn close_request(&self, obj: &Self::Type) -> Inhibit {
@@ -74,7 +70,6 @@ mod imp {
         }
     }
 
-    impl WidgetImpl for ExampleApplicationWindow {}
     impl ApplicationWindowImpl for ExampleApplicationWindow {}
 }
 

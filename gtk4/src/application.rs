@@ -13,28 +13,17 @@ use std::env;
 
 mod imp {
     use super::*;
-    use glib::subclass;
 
-    #[derive(Debug)]
+    #[derive(Debug, Default)]
     pub struct ExampleApplication {
         pub window: OnceCell<WeakRef<ExampleApplicationWindow>>,
     }
 
+    #[glib::object_subclass]
     impl ObjectSubclass for ExampleApplication {
         const NAME: &'static str = "ExampleApplication";
         type Type = super::ExampleApplication;
         type ParentType = gtk::Application;
-        type Interfaces = ();
-        type Instance = subclass::simple::InstanceStruct<Self>;
-        type Class = subclass::simple::ClassStruct<Self>;
-
-        glib::object_subclass!();
-
-        fn new() -> Self {
-            Self {
-                window: OnceCell::new(),
-            }
-        }
     }
 
     impl ObjectImpl for ExampleApplication {}
