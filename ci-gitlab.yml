@@ -3,7 +3,7 @@ stages:
   - test
 
 flatpak:
-  image: 'registry.gitlab.gnome.org/gnome/gnome-runtime-images/rust_bundle:3.38'
+  image: 'registry.gitlab.gnome.org/gnome/gnome-runtime-images/rust_bundle:40'
   stage: test
   tags:
     - flatpak
