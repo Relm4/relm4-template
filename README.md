@@ -49,6 +49,23 @@ Use gtk4 [Y/n]: y
 
 A new directory named `contrast` containing the generated project
 
+## Building the project
+
+Make sure you have flatpak installed. Then run the commands below. Replace `<application_id>` with the value you entered during project creation.
+
+```
+flatpak install org.gnome.Sdk/x86_64/40 org.freedesktop.Sdk.Extension.rust-stable org.gnome.Platform/x86_64/40
+flatpak-builder --user flatpak_app build-aux/<application_id>.Devel.json
+```
+
+## Running the project
+
+Once the project is build, run the command below. Replace Replace `<application_id>` and `<project_name>` with the values you entered during project creation.
+
+```
+flatpak-builder --run flatpak_app build-aux/<application_id>.Devel.json <project_name>
+```
+
 ## Credits
 
 - [Podcasts](https://gitlab.gnome.org/World/podcasts)
