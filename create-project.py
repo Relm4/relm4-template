@@ -123,15 +123,15 @@ folders_to_move = [
     "README.md",
 ]
 
-os.makedirs(project_dir + "/data/resources/ui", exist_ok=True)
-os.makedirs(project_dir + "/.github/workflows", exist_ok=True)
-
 for folder in folders_to_move:
     folder_path = f"./{folder}"
     if os.path.isdir(folder_path):
-        shutil.copytree(folder_path, f"./{project_name}/{folder}", dirs_exist_ok=True)
+        shutil.copytree(folder_path, f"./{project_name}/{folder}")
     else:
         shutil.copyfile(folder_path, f"./{project_name}/{folder}")
+
+os.makedirs(project_dir + "/data/resources/ui", exist_ok=True)
+os.makedirs(project_dir + "/.github/workflows", exist_ok=True)
 
 for file in FILES:
     current_path = os.path.join(project_dir, file)
