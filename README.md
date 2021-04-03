@@ -51,7 +51,7 @@ A new directory named `contrast` containing the generated project
 
 ## Building the project
 
-Make sure you have flatpak installed. Then run the commands below. Replace `<application_id>` with the value you entered during project creation.
+Make sure you have `flatpak` and `flatpak-builder` installed. Then run the commands below. Replace `<application_id>` with the value you entered during project creation.
 
 ```
 flatpak install org.gnome.Sdk//40 org.freedesktop.Sdk.Extension.rust-stable//20.08 org.gnome.Platform//40
