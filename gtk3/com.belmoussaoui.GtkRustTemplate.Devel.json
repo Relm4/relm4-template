@@ -21,7 +21,6 @@
             "--share=network"
         ],
         "env": {
-            "CARGO_HOME": "/run/build/gtk-rust-template/cargo",
             "RUST_BACKTRACE": "1"
         }
     },
