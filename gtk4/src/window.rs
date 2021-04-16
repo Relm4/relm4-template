@@ -51,7 +51,7 @@ mod imp {
 
             // Devel Profile
             if PROFILE == "Devel" {
-                obj.get_style_context().add_class("devel");
+                obj.style_context().add_class("devel");
             }
 
             // load latest window state
@@ -93,7 +93,7 @@ impl ExampleApplicationWindow {
     pub fn save_window_size(&self) -> Result<(), glib::BoolError> {
         let settings = &imp::ExampleApplicationWindow::from_instance(self).settings;
 
-        let size = self.get_default_size();
+        let size = self.default_size();
 
         settings.set_int("window-width", size.0)?;
         settings.set_int("window-height", size.1)?;
