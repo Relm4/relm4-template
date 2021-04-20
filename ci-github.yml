@@ -12,7 +12,7 @@ jobs:
       options: --privileged
     steps:
     - uses: actions/checkout@v2
-    - uses: bilelmoussaoui/flatpak-github-actions@v3
+    - uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v3
       with:
         bundle: gtk-rust-template.flatpak
         manifest-path: build-aux/com.belmoussaoui.GtkRustTemplate.Devel.json
