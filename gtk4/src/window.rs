@@ -46,7 +46,7 @@ mod imp {
 
             let builder =
                 gtk::Builder::from_resource("/com/belmoussaoui/GtkRustTemplate/shortcuts.ui");
-            let shortcuts = builder.get_object("shortcuts").unwrap();
+            let shortcuts = builder.object("shortcuts").unwrap();
             obj.set_help_overlay(Some(&shortcuts));
 
             // Devel Profile
@@ -106,9 +106,9 @@ impl ExampleApplicationWindow {
     fn load_window_size(&self) {
         let settings = &imp::ExampleApplicationWindow::from_instance(self).settings;
 
-        let width = settings.get_int("window-width");
-        let height = settings.get_int("window-height");
-        let is_maximized = settings.get_boolean("is-maximized");
+        let width = settings.int("window-width");
+        let height = settings.int("window-height");
+        let is_maximized = settings.boolean("is-maximized");
 
         self.set_default_size(width, height);
 
