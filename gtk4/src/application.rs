@@ -126,7 +126,8 @@ impl ExampleApplication {
         let dialog = gtk::AboutDialogBuilder::new()
             .program_name("GTK Rust Template")
             .logo_icon_name(config::APP_ID)
-            .license_type(gtk::License::MitX11)
+            // Insert your license of choice here
+            // .license_type(gtk::License::MitX11)
             .website("https://gitlab.gnome.org/bilelmoussaoui/gtk-rust-template/")
             .version(config::VERSION)
             .transient_for(&self.get_main_window())

@@ -1,8 +1,9 @@
-project('gtk-rust-template',
-        'rust',
-        version: '0.0.1',
-        license: 'MIT',
-  meson_version: '>= 0.50')
+project(
+  'gtk-rust-template',
+  'rust',
+  version: '0.0.1',
+  meson_version: '>= 0.50',
+)
 
 i18n = import('i18n')
 gnome = import('gnome')
