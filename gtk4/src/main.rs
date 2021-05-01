@@ -14,8 +14,8 @@ fn main() {
 
     // Prepare i18n
     setlocale(LocaleCategory::LcAll, "");
-    bindtextdomain(GETTEXT_PACKAGE, LOCALEDIR);
-    textdomain(GETTEXT_PACKAGE);
+    bindtextdomain(GETTEXT_PACKAGE, LOCALEDIR).expect("Unable to bind the text domain");
+    textdomain(GETTEXT_PACKAGE).expect("Unable to switch to the text domain");
 
     gtk::glib::set_application_name("GTK Rust Template");
     gtk::glib::set_prgname(Some("gtk-rust-template"));
