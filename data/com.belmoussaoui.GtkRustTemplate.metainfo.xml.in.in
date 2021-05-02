@@ -6,7 +6,7 @@
   <!-- Insert your license of choice here -->
   <!-- <project_license>MIT</project_license> -->
   <name>GTK Rust Template</name>
-  <summary>A GTK + Rust application template.</summary>
+  <summary>Write a GTK + Rust application</summary>
   <description>
     <p>A boilerplate template for GTK + Rust. It uses Meson as a build system and has flatpak support by default.</p>
   </description>

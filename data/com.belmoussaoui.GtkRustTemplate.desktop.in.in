@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=GTK Rust Template
-Comment=A GTK + Rust application boilerplate template
+Comment=Write a GTK + Rust application
 Type=Application
 Exec=gtk-rust-template
 Terminal=false
