@@ -38,7 +38,7 @@ FILES = [
     "data/com.belmoussaoui.GtkRustTemplate.desktop.in.in",
     "data/com.belmoussaoui.GtkRustTemplate.gschema.xml.in",
     "data/com.belmoussaoui.GtkRustTemplate.metainfo.xml.in.in",
-    "data/resources.gresource.xml",
+    "data/resources/resources.gresource.xml",
     "po/POTFILES.in",
     f"{source_dir}/src/application.rs",
     f"{source_dir}/src/main.rs",
