@@ -10,7 +10,7 @@ mod imp {
     use super::*;
 
     #[derive(Debug, CompositeTemplate)]
-    #[template(resource = "/com/belmoussaoui/GtkRustTemplate/window.ui")]
+    #[template(resource = "/com/belmoussaoui/GtkRustTemplate/ui/window.ui")]
     pub struct ExampleApplicationWindow {
         #[template_child]
         pub headerbar: TemplateChild<gtk::HeaderBar>,
@@ -45,7 +45,7 @@ mod imp {
             self.parent_constructed(obj);
 
             let builder =
-                gtk::Builder::from_resource("/com/belmoussaoui/GtkRustTemplate/shortcuts.ui");
+                gtk::Builder::from_resource("/com/belmoussaoui/GtkRustTemplate/ui/shortcuts.ui");
             let shortcuts = builder.object("shortcuts").unwrap();
             obj.set_help_overlay(Some(&shortcuts));
 

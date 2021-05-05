@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/com/belmoussaoui/GtkRustTemplate/">
-    <file compressed="true" preprocess="xml-stripblanks" alias="shortcuts.ui">ui/shortcuts.ui</file>
-    <file compressed="true" preprocess="xml-stripblanks" alias="window.ui">ui/window.ui</file>
+    <file compressed="true" preprocess="xml-stripblanks">ui/shortcuts.ui</file>
+    <file compressed="true" preprocess="xml-stripblanks">ui/window.ui</file>
 
     <file compressed="true">style.css</file>
   </gresource>

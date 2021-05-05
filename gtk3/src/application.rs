@@ -28,7 +28,7 @@ impl Application {
     }
 
     fn setup_widgets(&self) {
-        let builder = gtk::Builder::from_resource("/com/belmoussaoui/GtkRustTemplate/shortcuts.ui");
+        let builder = gtk::Builder::from_resource("/com/belmoussaoui/GtkRustTemplate/ui/shortcuts.ui");
         get_widget!(builder, gtk::ShortcutsWindow, shortcuts);
         self.window.widget.set_help_overlay(Some(&shortcuts));
     }
