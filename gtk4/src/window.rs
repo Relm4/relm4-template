@@ -80,8 +80,7 @@ glib::wrapper! {
 
 impl ExampleApplicationWindow {
     pub fn new(app: &ExampleApplication) -> Self {
-        let window: Self =
-            glib::Object::new(&[]).expect("Failed to create ExampleApplicationWindow");
+        let window: Self = glib::Object::new(&[]).expect("Failed to create ExampleApplicationWindow");
         window.set_application(Some(app));
 
         // Set icons for shell
