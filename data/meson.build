@@ -57,7 +57,7 @@ endif
 gschema_conf = configuration_data()
 gschema_conf.set('app-id', application_id)
 gschema_conf.set('gettext-package', gettext_package)
-gschema_file = configure_file(
+configure_file(
   input: '@0@.gschema.xml.in'.format(base_id),
   output: '@0@.gschema.xml'.format(application_id),
   configuration: gschema_conf,
@@ -72,6 +72,5 @@ if glib_compile_schemas.found()
     args: [
       '--strict', '--dry-run', meson.current_build_dir()
     ],
-    depends: gschema_file,
   )
 endif
