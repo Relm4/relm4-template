@@ -44,7 +44,6 @@ Application ID (see: https://developer.gnome.org/ChooseApplicationID/): org.gnom
 Author: Bilal Elmoussaoui
 Email: bil.elmoussaoui@gmail.com
 Github/Gitlab repository: https://gitlab.gnome.org/World/design/contrast/
-Use gtk4 [Y/n]: y
 ```
 
 A new directory named `contrast` containing the generated project
