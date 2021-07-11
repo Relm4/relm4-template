@@ -19,12 +19,10 @@ run_command(
 )
 
 sources = files(
-  'application/imp.rs',
-  'application/mod.rs',
-  'window/imp.rs',
-  'window/mod.rs',
+  'application.rs',
   'config.rs',
   'main.rs',
+  'window.rs',
 )
 
 custom_target(

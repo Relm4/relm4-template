@@ -1,14 +1,66 @@
-mod imp;
-
-use crate::config;
-use crate::window::ExampleApplicationWindow;
-use gio::ApplicationFlags;
 use glib::clone;
 use gtk::prelude::*;
 use gtk::subclass::prelude::*;
 use gtk::{gdk, gio, glib};
-use gtk::{StyleContext, STYLE_PROVIDER_PRIORITY_APPLICATION};
-use log::info;
+use log::{debug, info};
+
+use crate::config::{APP_ID, PKGDATADIR, PROFILE, VERSION};
+use crate::window::ExampleApplicationWindow;
+
+mod imp {
+    use super::*;
+    use glib::WeakRef;
+    use once_cell::sync::OnceCell;
+
+    #[derive(Debug, Default)]
+    pub struct ExampleApplication {
+        pub window: OnceCell<WeakRef<ExampleApplicationWindow>>,
+    }
+
+    #[glib::object_subclass]
+    impl ObjectSubclass for ExampleApplication {
+        const NAME: &'static str = "ExampleApplication";
+        type Type = super::ExampleApplication;
+        type ParentType = gtk::Application;
+    }
+
+    impl ObjectImpl for ExampleApplication {}
+
+    impl ApplicationImpl for ExampleApplication {
+        fn activate(&self, app: &Self::Type) {
+            debug!("GtkApplication<ExampleApplication>::activate");
+
+            if let Some(window) = self.window.get() {
+                let window = window.upgrade().unwrap();
+                window.show();
+                window.present();
+                return;
+            }
+
+            // Set icons for shell
+            gtk::Window::set_default_icon_name(APP_ID);
+
+            app.setup_css();
+
+            let window = ExampleApplicationWindow::new(app);
+            self.window
+                .set(window.downgrade())
+                .expect("Window already set.");
+
+            app.setup_gactions();
+            app.setup_accels();
+
+            app.get_main_window().present();
+        }
+
+        fn startup(&self, app: &Self::Type) {
+            debug!("GtkApplication<ExampleApplication>::startup");
+            self.parent_startup(app);
+        }
+    }
+
+    impl GtkApplicationImpl for ExampleApplication {}
+}
 
 glib::wrapper! {
     pub struct ExampleApplication(ObjectSubclass<imp::ExampleApplication>)
@@ -19,8 +71,12 @@ glib::wrapper! {
 impl ExampleApplication {
     pub fn new() -> Self {
         glib::Object::new(&[
-            ("application-id", &Some(config::APP_ID)),
-            ("flags", &ApplicationFlags::empty()),
+            ("application-id", &Some(APP_ID)),
+            ("flags", &gio::ApplicationFlags::empty()),
+            (
+                "resource-base-path",
+                &Some("/com/belmoussaoui/GtkRustTemplate/"),
+            ),
         ])
         .expect("Application initialization failed...")
     }
@@ -51,17 +107,16 @@ impl ExampleApplication {
     // Sets up keyboard shortcuts
     fn setup_accels(&self) {
         self.set_accels_for_action("app.quit", &["<primary>q"]);
-        self.set_accels_for_action("win.show-help-overlay", &["<primary>question"]);
     }
 
     fn setup_css(&self) {
         let provider = gtk::CssProvider::new();
         provider.load_from_resource("/com/belmoussaoui/GtkRustTemplate/style.css");
         if let Some(display) = gdk::Display::default() {
-            StyleContext::add_provider_for_display(
+            gtk::StyleContext::add_provider_for_display(
                 &display,
                 &provider,
-                STYLE_PROVIDER_PRIORITY_APPLICATION,
+                gtk::STYLE_PROVIDER_PRIORITY_APPLICATION,
             );
         }
     }
@@ -69,11 +124,11 @@ impl ExampleApplication {
     fn show_about_dialog(&self) {
         let dialog = gtk::AboutDialogBuilder::new()
             .program_name("GTK Rust Template")
-            .logo_icon_name(config::APP_ID)
+            .logo_icon_name(APP_ID)
             // Insert your license of choice here
             // .license_type(gtk::License::MitX11)
             .website("https://gitlab.gnome.org/bilelmoussaoui/gtk-rust-template/")
-            .version(config::VERSION)
+            .version(VERSION)
             .transient_for(&self.get_main_window())
             .modal(true)
             .authors(vec!["Bilal Elmoussaoui".into()])
@@ -84,9 +139,9 @@ impl ExampleApplication {
     }
 
     pub fn run(&self) {
-        info!("GTK Rust Template ({})", config::APP_ID);
-        info!("Version: {} ({})", config::VERSION, config::PROFILE);
-        info!("Datadir: {}", config::PKGDATADIR);
+        info!("GTK Rust Template ({})", APP_ID);
+        info!("Version: {} ({})", VERSION, PROFILE);
+        info!("Datadir: {}", PKGDATADIR);
 
         ApplicationExtManual::run(self);
     }
