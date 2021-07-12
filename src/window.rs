@@ -1,7 +1,6 @@
 use gio::Settings;
 use gtk::prelude::*;
 use gtk::subclass::prelude::*;
-use gtk::CompositeTemplate;
 use gtk::{gio, glib};
 
 use log::warn;
@@ -11,6 +10,8 @@ use crate::config::{APP_ID, PROFILE};
 
 mod imp {
     use super::*;
+
+    use gtk::CompositeTemplate;
 
     #[derive(Debug, CompositeTemplate)]
     #[template(resource = "/com/belmoussaoui/GtkRustTemplate/ui/window.ui")]
