@@ -87,7 +87,7 @@ impl ExampleApplicationWindow {
             .expect("Failed to create ExampleApplicationWindow")
     }
 
-    pub fn save_window_size(&self) -> Result<(), glib::BoolError> {
+    fn save_window_size(&self) -> Result<(), glib::BoolError> {
         let settings = &imp::ExampleApplicationWindow::from_instance(self).settings;
 
         let size = self.default_size();
