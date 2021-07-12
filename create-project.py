@@ -10,7 +10,7 @@ print("Welcome to GTK Rust Template")
 name = input("Name (e.g. My Awesome App): ")
 project_name = input("Project Name (e.g. my-awesome-app): ")
 app_id = input(
-    "Application ID (see: https://developer.gnome.org/ChooseApplicationID/): "
+    "Application ID (e.g. org.domain.MyAwesomeApp, see: https://developer.gnome.org/ChooseApplicationID/): "
 )
 author = input("Author: ")
 update_contact = input("Email: ")

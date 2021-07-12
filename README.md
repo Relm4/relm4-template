@@ -40,7 +40,7 @@ python3 create-project.py
 Welcome to GTK Rust Template
 Name: Contrast
 Project Name: contrast
-Application ID (see: https://developer.gnome.org/ChooseApplicationID/): org.gnome.design.Contrast
+Application ID (e.g. org.domain.MyAwesomeApp, see: https://developer.gnome.org/ChooseApplicationID/): org.gnome.design.Contrast
 Author: Bilal Elmoussaoui
 Email: bil.elmoussaoui@gmail.com
 ```
