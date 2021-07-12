@@ -1,8 +1,8 @@
 use gio::Settings;
 use gtk::prelude::*;
 use gtk::subclass::prelude::*;
+use gtk::CompositeTemplate;
 use gtk::{gio, glib};
-use gtk::{ApplicationWindow, CompositeTemplate, Window};
 
 use log::warn;
 
@@ -77,7 +77,7 @@ mod imp {
 
 glib::wrapper! {
     pub struct ExampleApplicationWindow(ObjectSubclass<imp::ExampleApplicationWindow>)
-        @extends gtk::Widget, Window, ApplicationWindow,
+        @extends gtk::Widget, gtk::Window, gtk::ApplicationWindow,
         @implements gio::ActionMap, gio::ActionGroup;
 }
 
