@@ -88,24 +88,26 @@ impl ExampleApplicationWindow {
     }
 
     fn save_window_size(&self) -> Result<(), glib::BoolError> {
-        let settings = &imp::ExampleApplicationWindow::from_instance(self).settings;
+        let self_ = imp::ExampleApplicationWindow::from_instance(self);
 
-        let size = self.default_size();
+        let (width, height) = self.default_size();
 
-        settings.set_int("window-width", size.0)?;
-        settings.set_int("window-height", size.1)?;
+        self_.settings.set_int("window-width", width)?;
+        self_.settings.set_int("window-height", height)?;
 
-        settings.set_boolean("is-maximized", self.is_maximized())?;
+        self_
+            .settings
+            .set_boolean("is-maximized", self.is_maximized())?;
 
         Ok(())
     }
 
     fn load_window_size(&self) {
-        let settings = &imp::ExampleApplicationWindow::from_instance(self).settings;
+        let self_ = imp::ExampleApplicationWindow::from_instance(self);
 
-        let width = settings.int("window-width");
-        let height = settings.int("window-height");
-        let is_maximized = settings.boolean("is-maximized");
+        let width = self_.settings.int("window-width");
+        let height = self_.settings.int("window-height");
+        let is_maximized = self_.settings.boolean("is-maximized");
 
         self.set_default_size(width, height);
 
