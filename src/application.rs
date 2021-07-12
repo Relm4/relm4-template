@@ -50,7 +50,7 @@ mod imp {
             app.setup_gactions();
             app.setup_accels();
 
-            app.get_main_window().present();
+            app.main_window().present();
         }
 
         fn startup(&self, app: &Self::Type) {
@@ -81,7 +81,7 @@ impl ExampleApplication {
         .expect("Application initialization failed...")
     }
 
-    fn get_main_window(&self) -> ExampleApplicationWindow {
+    fn main_window(&self) -> ExampleApplicationWindow {
         let imp = imp::ExampleApplication::from_instance(self);
         imp.window.get().unwrap().upgrade().unwrap()
     }
@@ -91,7 +91,7 @@ impl ExampleApplication {
         let action_quit = gio::SimpleAction::new("quit", None);
         action_quit.connect_activate(clone!(@weak self as app => move |_, _| {
             // This is needed to trigger the delete event and saving the window state
-            app.get_main_window().close();
+            app.main_window().close();
             app.quit();
         }));
         self.add_action(&action_quit);
@@ -129,7 +129,7 @@ impl ExampleApplication {
             // .license_type(gtk::License::MitX11)
             .website("https://gitlab.gnome.org/bilelmoussaoui/gtk-rust-template/")
             .version(VERSION)
-            .transient_for(&self.get_main_window())
+            .transient_for(&self.main_window())
             .modal(true)
             .authors(vec!["Bilal Elmoussaoui".into()])
             .artists(vec!["Bilal Elmoussaoui".into()])
