@@ -1,9 +1,6 @@
-use gio::Settings;
 use gtk::prelude::*;
 use gtk::subclass::prelude::*;
 use gtk::{gio, glib};
-
-use log::warn;
 
 use crate::application::ExampleApplication;
 use crate::config::{APP_ID, PROFILE};
@@ -18,14 +15,14 @@ mod imp {
     pub struct ExampleApplicationWindow {
         #[template_child]
         pub headerbar: TemplateChild<gtk::HeaderBar>,
-        pub settings: Settings,
+        pub settings: gio::Settings,
     }
 
     impl Default for ExampleApplicationWindow {
         fn default() -> Self {
             Self {
                 headerbar: TemplateChild::default(),
-                settings: Settings::new(APP_ID),
+                settings: gio::Settings::new(APP_ID),
             }
         }
     }
@@ -65,7 +62,7 @@ mod imp {
         // Save window state on delete event
         fn close_request(&self, window: &Self::Type) -> gtk::Inhibit {
             if let Err(err) = window.save_window_size() {
-                warn!("Failed to save window state, {}", &err);
+                log::warn!("Failed to save window state, {}", &err);
             }
 
             // Pass close request on to the parent
