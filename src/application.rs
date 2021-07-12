@@ -127,7 +127,8 @@ impl ExampleApplication {
             .logo_icon_name(APP_ID)
             // Insert your license of choice here
             // .license_type(gtk::License::MitX11)
-            .website("https://gitlab.gnome.org/bilelmoussaoui/gtk-rust-template/")
+            // Insert your website here
+            // .website("https://gitlab.gnome.org/bilelmoussaoui/gtk-rust-template/")
             .version(VERSION)
             .transient_for(&self.main_window())
             .modal(true)

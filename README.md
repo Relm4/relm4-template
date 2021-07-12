@@ -43,7 +43,6 @@ Project Name: contrast
 Application ID (see: https://developer.gnome.org/ChooseApplicationID/): org.gnome.design.Contrast
 Author: Bilal Elmoussaoui
 Email: bil.elmoussaoui@gmail.com
-Github/Gitlab repository: https://gitlab.gnome.org/World/design/contrast/
 ```
 
 A new directory named `contrast` containing the generated project

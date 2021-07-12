@@ -1,4 +1,0 @@
-{
-    "python.formatting.provider": "black",
-    "rust-analyzer.server.path": "/var/home/julian/Projekte/gnome/applications/gtk-rust-template/.flatpak/rust-analyzer.sh"
-}
