@@ -37,18 +37,10 @@ mod imp {
                 return;
             }
 
-            // Set icons for shell
-            gtk::Window::set_default_icon_name(APP_ID);
-
-            app.setup_css();
-
             let window = ExampleApplicationWindow::new(app);
             self.window
                 .set(window.downgrade())
                 .expect("Window already set.");
-
-            app.setup_gactions();
-            app.setup_accels();
 
             app.main_window().present();
         }
@@ -56,6 +48,13 @@ mod imp {
         fn startup(&self, app: &Self::Type) {
             debug!("GtkApplication<ExampleApplication>::startup");
             self.parent_startup(app);
+
+            // Set icons for shell
+            gtk::Window::set_default_icon_name(APP_ID);
+
+            app.setup_css();
+            app.setup_gactions();
+            app.setup_accels();
         }
     }
 
