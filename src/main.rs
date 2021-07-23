@@ -5,7 +5,7 @@ mod window;
 
 use application::ExampleApplication;
 use config::{GETTEXT_PACKAGE, LOCALEDIR, RESOURCES_FILE};
-use gettextrs::LocaleCategory;
+use gettextrs::{gettext, LocaleCategory};
 use gtk::{gio, glib};
 
 fn main() {
@@ -17,7 +17,7 @@ fn main() {
     gettextrs::bindtextdomain(GETTEXT_PACKAGE, LOCALEDIR).expect("Unable to bind the text domain");
     gettextrs::textdomain(GETTEXT_PACKAGE).expect("Unable to switch to the text domain");
 
-    glib::set_application_name("GTK Rust Template");
+    glib::set_application_name(&gettext("GTK Rust Template"));
 
     gtk::init().expect("Unable to start GTK4");
 
