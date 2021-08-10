@@ -124,7 +124,6 @@ impl ExampleApplication {
 
     fn show_about_dialog(&self) {
         let dialog = gtk::AboutDialogBuilder::new()
-            .program_name("GTK Rust Template")
             .logo_icon_name(APP_ID)
             // Insert your license of choice here
             // .license_type(gtk::License::MitX11)
