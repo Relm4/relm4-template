@@ -3,10 +3,11 @@ mod application;
 mod config;
 mod window;
 
-use application::ExampleApplication;
-use config::{GETTEXT_PACKAGE, LOCALEDIR, RESOURCES_FILE};
 use gettextrs::{gettext, LocaleCategory};
 use gtk::{gio, glib};
+
+use self::application::ExampleApplication;
+use self::config::{GETTEXT_PACKAGE, LOCALEDIR, RESOURCES_FILE};
 
 fn main() {
     // Initialize logger
