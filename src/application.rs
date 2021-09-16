@@ -35,7 +35,6 @@ mod imp {
 
             if let Some(window) = self.window.get() {
                 let window = window.upgrade().unwrap();
-                window.show();
                 window.present();
                 return;
             }
@@ -137,7 +136,7 @@ impl ExampleApplication {
             .artists(vec!["Bilal Elmoussaoui".into()])
             .build();
 
-        dialog.show();
+        dialog.present();
     }
 
     pub fn run(&self) {
