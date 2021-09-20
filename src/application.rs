@@ -1,8 +1,10 @@
+use gettextrs::gettext;
+use log::{debug, info};
+
 use glib::clone;
 use gtk::prelude::*;
 use gtk::subclass::prelude::*;
 use gtk::{gdk, gio, glib};
-use log::{debug, info};
 
 use crate::config::{APP_ID, PKGDATADIR, PROFILE, VERSION};
 use crate::window::ExampleApplicationWindow;
@@ -130,6 +132,7 @@ impl ExampleApplication {
             // .website("https://gitlab.gnome.org/bilelmoussaoui/gtk-rust-template/")
             .version(VERSION)
             .transient_for(&self.main_window())
+            .translator_credits(&gettext("translator-credits"))
             .modal(true)
             .authors(vec!["Bilal Elmoussaoui".into()])
             .artists(vec!["Bilal Elmoussaoui".into()])
