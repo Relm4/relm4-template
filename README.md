@@ -64,6 +64,13 @@ Once the project is build, run the command below. Replace Replace `<application_
 flatpak-builder --run flatpak_app build-aux/<application_id>.Devel.json <project_name>
 ```
 
+## Community
+
+Join the GNOME and gtk-rs community!
+- [Matrix chat](https://matrix.to/#/#rust:gnome.org): chat with other developers using gtk-rs
+- [Discourse forum](https://discourse.gnome.org/tag/rust): topics tagged with `rust` on the GNOME forum.
+- [GNOME circle](https://circle.gnome.org/): take inspiration from applications and libraries already extending the GNOME ecosystem.
+
 ## Credits
 
 - [Podcasts](https://gitlab.gnome.org/World/podcasts)
