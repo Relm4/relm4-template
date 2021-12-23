@@ -31,6 +31,7 @@ mod imp {
     impl ApplicationImpl for ExampleApplication {
         fn activate(&self, app: &Self::Type) {
             debug!("GtkApplication<ExampleApplication>::activate");
+            self.parent_activate(app);
 
             if let Some(window) = self.window.get() {
                 let window = window.upgrade().unwrap();
