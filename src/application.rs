@@ -107,7 +107,7 @@ impl ExampleApplication {
 
     // Sets up keyboard shortcuts
     fn setup_accels(&self) {
-        self.set_accels_for_action("app.quit", &["<primary>q"]);
+        self.set_accels_for_action("app.quit", &["<Control>q"]);
     }
 
     fn setup_css(&self) {
