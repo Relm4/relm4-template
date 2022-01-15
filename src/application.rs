@@ -83,8 +83,7 @@ impl ExampleApplication {
     }
 
     fn main_window(&self) -> ExampleApplicationWindow {
-        let imp = imp::ExampleApplication::from_instance(self);
-        imp.window.get().unwrap().upgrade().unwrap()
+        self.imp().window.get().unwrap().upgrade().unwrap()
     }
 
     fn setup_gactions(&self) {
