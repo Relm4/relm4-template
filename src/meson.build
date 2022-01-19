@@ -18,30 +18,35 @@ run_command(
   check: true
 )
 
-rust_sources = files(
-  'application.rs',
-  'config.rs',
-  'main.rs',
-  'window.rs',
-)
+cargo_options = [ '--manifest-path', meson.source_root() / 'Cargo.toml' ]
+cargo_options += [ '--target-dir', meson.build_root() / 'src' ]
 
-sources = [rust_sources, cargo_sources]
+if get_option('profile') == 'default'
+  cargo_options += [ '--release' ]
+  rust_target = 'release'
+  message('Building in release mode')
+else
+  rust_target = 'debug'
+  message('Building in debug mode')
+endif
 
-custom_target(
+cargo_env = [ 'CARGO_HOME=' + meson.build_root() / 'cargo-home' ]
+
+cargo_build = custom_target(
   'cargo-build',
   build_by_default: true,
-  input: sources,
+  build_always_stale: true,
   output: meson.project_name(),
   console: true,
   install: true,
   install_dir: bindir,
   depends: resources,
   command: [
-    cargo_script,
-    meson.build_root(),
-    meson.source_root(),
-    '@OUTPUT@',
-    profile,
-    meson.project_name(),
+    'env',
+    cargo_env,
+    cargo, 'build',
+    cargo_options,
+    '&&',
+    'cp', 'src' / rust_target / meson.project_name(), '@OUTPUT@',
   ]
 )
