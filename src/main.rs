@@ -20,8 +20,6 @@ fn main() {
 
     glib::set_application_name(&gettext("GTK Rust Template"));
 
-    gtk::init().expect("Unable to start GTK4");
-
     let res = gio::Resource::load(RESOURCES_FILE).expect("Could not load gresource file");
     gio::resources_register(&res);
 
