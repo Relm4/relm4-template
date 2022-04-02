@@ -3,18 +3,15 @@
   <schema path="/com/belmoussaoui/GtkRustTemplate/" id="@app-id@" gettext-domain="@gettext-package@">
     <key name="window-width" type="i">
       <default>600</default>
-      <summary>Default window width</summary>
-      <description>Default window width</description>
+      <summary>Window width</summary>
     </key>
     <key name="window-height" type="i">
       <default>400</default>
-      <summary>Default window height</summary>
-      <description>Default window height</description>
+      <summary>Window height</summary>
     </key>
     <key name="is-maximized" type="b">
       <default>false</default>
-      <summary>Default window maximized behaviour</summary>
-      <description></description>
+      <summary>Window maximized state</summary>
     </key>
   </schema>
 </schemalist>
