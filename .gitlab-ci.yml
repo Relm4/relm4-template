@@ -3,7 +3,7 @@ stages:
   - test
 
 flatpak:
-  image: 'registry.gitlab.gnome.org/gnome/gnome-runtime-images/gnome:41'
+  image: 'registry.gitlab.gnome.org/gnome/gnome-runtime-images/gnome:42'
   stage: test
   tags:
     - flatpak
