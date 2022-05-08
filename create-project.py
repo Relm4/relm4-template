@@ -19,11 +19,14 @@ for segment in app_id.split(".")[:-1]:
 author = input("Author: ")
 update_contact = input("Email: ")
 
+project_name_alt = project_name.replace("-", "_")
+
 app_path = "/" + "/".join(app_id.split(".")) + "/"
 project_dir = Path(__file__).parent / project_name
 
 CURRENT_APP_ID = "com.belmoussaoui.GtkRustTemplate"
 CURRENT_PROJECT_NAME = "gtk-rust-template"
+CURRENT_PROJECT_NAME_ALT = "gtk_rust_template"
 CURRENT_NAME = "GTK Rust Template"
 CURRENT_AUTHOR = "Bilal Elmoussaoui"
 CURRENT_EMAIL = "bil.elmoussaoui@gmail.com"
@@ -93,6 +96,7 @@ for file in files_with_content_to_rename:
         content = content.replace(CURRENT_APP_ID, app_id)
         content = content.replace(CURRENT_APP_PATH, app_path)
         content = content.replace(CURRENT_PROJECT_NAME, project_name)
+        content = content.replace(CURRENT_PROJECT_NAME_ALT, project_name_alt)
         content = content.replace(CURRENT_NAME, name)
         content = content.replace(CURRENT_AUTHOR, author)
         content = content.replace(CURRENT_EMAIL, update_contact)

@@ -9,7 +9,7 @@
         "--socket=fallback-x11",
         "--socket=wayland",
         "--device=dri",
-        "--env=RUST_LOG=gtk-rust-template=debug",
+        "--env=RUST_LOG=gtk_rust_template=debug",
         "--env=G_MESSAGES_DEBUG=none",
         "--env=RUST_BACKTRACE=1"
     ],
