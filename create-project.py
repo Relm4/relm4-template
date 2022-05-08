@@ -12,6 +12,10 @@ project_name = input("Project Name (e.g. my-awesome-app): ")
 app_id = input(
     "Application ID (e.g. org.domain.MyAwesomeApp, see: https://developer.gnome.org/documentation/tutorials/application-id.html ): "
 )
+for segment in app_id.split(".")[:-1]:
+    if "-" in segment:
+        exit("App Id might only contain '-' in the last segment")
+
 author = input("Author: ")
 update_contact = input("Email: ")
 
