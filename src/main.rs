@@ -1,28 +1,54 @@
-mod application;
 #[rustfmt::skip]
 mod config;
-mod window;
+mod app;
+mod modals;
+mod setup;
 
-use gettextrs::{gettext, LocaleCategory};
-use gtk::{gio, glib};
+use gtk::gio;
+use gtk::prelude::ApplicationExt;
+use once_cell::unsync::Lazy;
+use relm4::{
+    actions::{AccelsPlus, RelmAction, RelmActionGroup},
+    gtk, RelmApp,
+};
 
-use self::application::ExampleApplication;
-use self::config::{GETTEXT_PACKAGE, LOCALEDIR, RESOURCES_FILE};
+use app::{App, ShortcutsAction};
+use setup::setup;
+
+use crate::config::APP_ID;
+
+relm4::new_action_group!(AppActionGroup, "app");
+relm4::new_stateless_action!(QuitAction, AppActionGroup, "quit");
+
+thread_local! {
+    static APP: Lazy<gtk::Application> = Lazy::new(|| {gtk::Application::new(Some(APP_ID), gio::ApplicationFlags::empty())});
+}
 
 fn main() {
-    // Initialize logger
-    pretty_env_logger::init();
+    setup();
 
-    // Prepare i18n
-    gettextrs::setlocale(LocaleCategory::LcAll, "");
-    gettextrs::bindtextdomain(GETTEXT_PACKAGE, LOCALEDIR).expect("Unable to bind the text domain");
-    gettextrs::textdomain(GETTEXT_PACKAGE).expect("Unable to switch to the text domain");
+    let app: RelmApp<App> = RelmApp::with_app(APP.with(|app| (*app).clone()));
 
-    glib::set_application_name(&gettext("GTK Rust Template"));
+    let actions = RelmActionGroup::<AppActionGroup>::new();
 
-    let res = gio::Resource::load(RESOURCES_FILE).expect("Could not load gresource file");
-    gio::resources_register(&res);
+    let quit_action = {
+        let app = app.app.clone();
+        RelmAction::<QuitAction>::new_stateless(move |_| {
+            app.quit();
+        })
+    };
 
-    let app = ExampleApplication::new();
-    app.run();
+    actions.add_action(quit_action);
+
+    app.app
+        .set_accelerators_for_action::<QuitAction>(&["<Control>q"]);
+    app.app
+        .set_accelerators_for_action::<ShortcutsAction>(&["<Control>?"]);
+
+    app.app.set_action_group(Some(&actions.into_action_group()));
+
+    app.app
+        .set_resource_base_path(Some("/com/belmoussaoui/GtkRustTemplate/"));
+
+    app.run(());
 }
