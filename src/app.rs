@@ -4,16 +4,20 @@ use relm4::{
     SimpleComponent,
 };
 
-use gtk::prelude::{GtkWindowExt, SettingsExt, WidgetExt};
+use gtk::prelude::{
+    ApplicationExt, ApplicationWindowExt, Cast, GtkWindowExt, SettingsExt, WidgetExt,
+};
 use gtk::{gio, glib};
 
 use crate::config::{APP_ID, PROFILE};
+use crate::main_app;
 use crate::modals::about::AboutDialog;
 
 pub(super) struct App {
     about_dialog: Controller<AboutDialog>,
 }
 
+#[derive(Debug)]
 pub(super) enum AppMsg {
     Quit,
 }
@@ -41,7 +45,22 @@ impl SimpleComponent for App {
     }
 
     view! {
-        main_window = gtk::Window {
+        main_window = gtk::ApplicationWindow::new(&main_app()) {
+            connect_close_request[sender] => move |_| {
+                sender.input(AppMsg::Quit);
+                gtk::Inhibit(true)
+            },
+
+            #[wrap(Some)]
+            set_help_overlay: shortcuts = &gtk::Builder::from_resource(
+                    "/com/belmoussaoui/GtkRustTemplate/gtk/help-overlay.ui"
+                )
+                .object::<gtk::ShortcutsWindow>("help_overlay")
+                .unwrap() -> gtk::ShortcutsWindow {
+                    set_transient_for: Some(&main_window),
+                    set_application: Some(&crate::main_app()),
+            },
+
             add_css_class?: if PROFILE == "Devel" {
                     Some("devel")
                 } else {
@@ -66,12 +85,12 @@ impl SimpleComponent for App {
     fn init(
         _params: Self::InitParams,
         root: &Self::Root,
-        _sender: &ComponentSender<Self>,
+        sender: &ComponentSender<Self>,
     ) -> ComponentParts<Self> {
         let widgets = view_output!();
 
         let about_dialog = ComponentBuilder::new()
-            .launch(widgets.main_window.clone())
+            .launch(widgets.main_window.upcast_ref::<gtk::Window>().clone())
             .detach();
 
         let model = Self { about_dialog };
@@ -79,15 +98,8 @@ impl SimpleComponent for App {
         let actions = RelmActionGroup::<WindowActionGroup>::new();
 
         let shortcuts_action = {
-            let main_window = widgets.main_window.clone();
+            let shortcuts = widgets.shortcuts.clone();
             RelmAction::<ShortcutsAction>::new_stateless(move |_| {
-                let shortcuts = gtk::Builder::from_resource(
-                    "/com/belmoussaoui/GtkRustTemplate/gtk/help-overlay.ui",
-                )
-                .object::<gtk::ShortcutsWindow>("help_overlay")
-                .unwrap();
-                shortcuts.set_transient_for(Some(&main_window));
-                shortcuts.set_application(Some(&crate::APP.with(|app| (**app).clone())));
                 shortcuts.present();
             })
         };
@@ -113,7 +125,7 @@ impl SimpleComponent for App {
 
     fn update(&mut self, message: Self::Input, _sender: &ComponentSender<Self>) {
         match message {
-            AppMsg::Quit => todo!("Graceful shutdown"),
+            AppMsg::Quit => main_app().quit(),
         }
     }
 
