@@ -24,7 +24,7 @@ impl SimpleComponent for AboutDialog {
     fn init(
         main_window: Self::InitParams,
         _root: &Self::Root,
-        _sender: &ComponentSender<Self>,
+        _sender: ComponentSender<Self>,
     ) -> ComponentParts<Self> {
         let model = Self {};
 
@@ -33,7 +33,7 @@ impl SimpleComponent for AboutDialog {
         ComponentParts { model, widgets }
     }
 
-    fn update_view(&self, widgets: &mut Self::Widgets, _sender: &ComponentSender<Self>) {
+    fn update_view(&self, widgets: &mut Self::Widgets, _sender: ComponentSender<Self>) {
         let dialog = gtk::AboutDialog::builder()
             .logo_icon_name(APP_ID)
             // Insert your license of choice here

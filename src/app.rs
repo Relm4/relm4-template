@@ -85,7 +85,7 @@ impl SimpleComponent for App {
     fn init(
         _params: Self::InitParams,
         root: &Self::Root,
-        sender: &ComponentSender<Self>,
+        sender: ComponentSender<Self>,
     ) -> ComponentParts<Self> {
         let widgets = view_output!();
 
@@ -123,7 +123,7 @@ impl SimpleComponent for App {
         ComponentParts { model, widgets }
     }
 
-    fn update(&mut self, message: Self::Input, _sender: &ComponentSender<Self>) {
+    fn update(&mut self, message: Self::Input, _sender: ComponentSender<Self>) {
         match message {
             AppMsg::Quit => main_app().quit(),
         }
