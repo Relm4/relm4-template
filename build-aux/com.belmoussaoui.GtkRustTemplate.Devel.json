@@ -1,11 +1,13 @@
 {
-    "app-id": "com.belmoussaoui.GtkRustTemplate.Devel",
+    "id": "com.belmoussaoui.GtkRustTemplate.Devel",
     "runtime": "org.gnome.Platform",
     "runtime-version": "42",
     "sdk": "org.gnome.Sdk",
-    "sdk-extensions": ["org.freedesktop.Sdk.Extension.rust-stable"],
+    "sdk-extensions": [
+        "org.freedesktop.Sdk.Extension.rust-stable"
+    ],
     "command": "gtk-rust-template",
-    "finish-args" : [
+    "finish-args": [
         "--socket=fallback-x11",
         "--socket=wayland",
         "--device=dri",
@@ -13,9 +15,9 @@
         "--env=G_MESSAGES_DEBUG=none",
         "--env=RUST_BACKTRACE=1"
     ],
-    "build-options" : {
-        "append-path" : "/usr/lib/sdk/rust-stable/bin",
-        "build-args" : [
+    "build-options": {
+        "append-path": "/usr/lib/sdk/rust-stable/bin",
+        "build-args": [
             "--share=network"
         ],
         "test-args": [
@@ -28,7 +30,9 @@
             "name": "gtk-rust-template",
             "buildsystem": "meson",
             "run-tests": true,
-            "config-opts": ["-Dprofile=development"],
+            "config-opts": [
+                "-Dprofile=development"
+            ],
             "sources": [
                 {
                     "type": "dir",
