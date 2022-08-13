@@ -1,6 +1,6 @@
 use relm4::{
     actions::{ActionGroupName, RelmAction, RelmActionGroup},
-    gtk, ComponentBuilder, ComponentController, ComponentParts, ComponentSender, Controller,
+    gtk, Component, ComponentController, ComponentParts, ComponentSender, Controller,
     SimpleComponent,
 };
 
@@ -29,10 +29,10 @@ relm4::new_stateless_action!(AboutAction, WindowActionGroup, "about");
 
 #[relm4::component(pub)]
 impl SimpleComponent for App {
+    type Init = ();
     type Input = AppMsg;
     type Output = ();
     type Widgets = AppWidgets;
-    type InitParams = ();
 
     menu! {
         primary_menu: {
@@ -83,13 +83,13 @@ impl SimpleComponent for App {
     }
 
     fn init(
-        _params: Self::InitParams,
+        _init: Self::Init,
         root: &Self::Root,
         sender: ComponentSender<Self>,
     ) -> ComponentParts<Self> {
         let widgets = view_output!();
 
-        let about_dialog = ComponentBuilder::new()
+        let about_dialog = AboutDialog::builder()
             .launch(widgets.main_window.upcast_ref::<gtk::Window>().clone())
             .detach();
 
