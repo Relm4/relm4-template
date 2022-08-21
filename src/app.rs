@@ -1,7 +1,7 @@
 use relm4::{
     actions::{ActionGroupName, RelmAction, RelmActionGroup},
-    gtk, Component, ComponentController, ComponentParts, ComponentSender, Controller,
-    SimpleComponent,
+    gtk, main_application, Component, ComponentController, ComponentParts, ComponentSender,
+    Controller, SimpleComponent,
 };
 
 use gtk::prelude::{
@@ -10,7 +10,6 @@ use gtk::prelude::{
 use gtk::{gio, glib};
 
 use crate::config::{APP_ID, PROFILE};
-use crate::main_app;
 use crate::modals::about::AboutDialog;
 
 pub(super) struct App {
@@ -45,7 +44,7 @@ impl SimpleComponent for App {
     }
 
     view! {
-        main_window = gtk::ApplicationWindow::new(&main_app()) {
+        main_window = gtk::ApplicationWindow::new(&main_application()) {
             connect_close_request[sender] => move |_| {
                 sender.input(AppMsg::Quit);
                 gtk::Inhibit(true)
@@ -58,7 +57,7 @@ impl SimpleComponent for App {
                 .object::<gtk::ShortcutsWindow>("help_overlay")
                 .unwrap() -> gtk::ShortcutsWindow {
                     set_transient_for: Some(&main_window),
-                    set_application: Some(&crate::main_app()),
+                    set_application: Some(&main_application()),
             },
 
             add_css_class?: if PROFILE == "Devel" {
@@ -125,7 +124,7 @@ impl SimpleComponent for App {
 
     fn update(&mut self, message: Self::Input, _sender: ComponentSender<Self>) {
         match message {
-            AppMsg::Quit => main_app().quit(),
+            AppMsg::Quit => main_application().quit(),
         }
     }
 

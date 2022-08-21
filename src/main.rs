@@ -4,12 +4,10 @@ mod app;
 mod modals;
 mod setup;
 
-use gtk::gio;
 use gtk::prelude::ApplicationExt;
-use once_cell::unsync::Lazy;
 use relm4::{
     actions::{AccelsPlus, RelmAction, RelmActionGroup},
-    gtk, RelmApp,
+    gtk, main_application, RelmApp,
 };
 
 use app::App;
@@ -20,18 +18,10 @@ use crate::config::APP_ID;
 relm4::new_action_group!(AppActionGroup, "app");
 relm4::new_stateless_action!(QuitAction, AppActionGroup, "quit");
 
-thread_local! {
-    static APP: Lazy<gtk::Application> = Lazy::new(|| { gtk::Application::new(Some(APP_ID), gio::ApplicationFlags::empty())});
-}
-
-fn main_app() -> gtk::Application {
-    APP.with(|app| (*app).clone())
-}
-
 fn main() {
     setup();
 
-    let app = main_app();
+    let app = main_application();
     app.set_resource_base_path(Some("/com/belmoussaoui/GtkRustTemplate/"));
 
     let actions = RelmActionGroup::<AppActionGroup>::new();
@@ -42,7 +32,6 @@ fn main() {
             app.quit();
         })
     };
-
     actions.add_action(quit_action);
 
     app.set_accelerators_for_action::<QuitAction>(&["<Control>q"]);
