@@ -1,40 +1,21 @@
 use gtk::prelude::GtkWindowExt;
-use relm4::{component::EmptyRoot, gtk, ComponentParts, ComponentSender, SimpleComponent};
+use relm4::{gtk, ComponentParts, ComponentSender, SimpleComponent};
 
 use gettextrs::gettext;
 
 use crate::config::{APP_ID, VERSION};
 
 pub struct AboutDialog {}
-pub struct AboutDialogWidgets {
-    main_window: gtk::Window,
-}
 
 impl SimpleComponent for AboutDialog {
-    type Init = gtk::Window;
-    type Widgets = AboutDialogWidgets;
+    type Init = ();
+    type Widgets = gtk::AboutDialog;
     type Input = ();
     type Output = ();
-    type Root = EmptyRoot;
+    type Root = gtk::AboutDialog;
 
     fn init_root() -> Self::Root {
-        EmptyRoot::default()
-    }
-
-    fn init(
-        main_window: Self::Init,
-        _root: &Self::Root,
-        _sender: ComponentSender<Self>,
-    ) -> ComponentParts<Self> {
-        let model = Self {};
-
-        let widgets = AboutDialogWidgets { main_window };
-
-        ComponentParts { model, widgets }
-    }
-
-    fn update_view(&self, widgets: &mut Self::Widgets, _sender: ComponentSender<Self>) {
-        let dialog = gtk::AboutDialog::builder()
+        gtk::AboutDialog::builder()
             .logo_icon_name(APP_ID)
             // Insert your license of choice here
             // .license_type(gtk::License::MitX11)
@@ -43,10 +24,24 @@ impl SimpleComponent for AboutDialog {
             .version(VERSION)
             .translator_credits(&gettext("translator-credits"))
             .modal(true)
-            .transient_for(&widgets.main_window)
             .authors(vec!["Bilal Elmoussaoui".into()])
             .artists(vec!["Bilal Elmoussaoui".into()])
-            .build();
+            .build()
+    }
+
+    fn init(
+        _: Self::Init,
+        root: &Self::Root,
+        _sender: ComponentSender<Self>,
+    ) -> ComponentParts<Self> {
+        let model = Self {};
+
+        let widgets = root.clone();
+
+        ComponentParts { model, widgets }
+    }
+
+    fn update_view(&self, dialog: &mut Self::Widgets, _sender: ComponentSender<Self>) {
         dialog.present();
     }
 }

@@ -4,9 +4,7 @@ use relm4::{
     Controller, SimpleComponent,
 };
 
-use gtk::prelude::{
-    ApplicationExt, ApplicationWindowExt, Cast, GtkWindowExt, SettingsExt, WidgetExt,
-};
+use gtk::prelude::{ApplicationExt, ApplicationWindowExt, GtkWindowExt, SettingsExt, WidgetExt};
 use gtk::{gio, glib};
 
 use crate::config::{APP_ID, PROFILE};
@@ -86,13 +84,14 @@ impl SimpleComponent for App {
         root: &Self::Root,
         sender: ComponentSender<Self>,
     ) -> ComponentParts<Self> {
-        let widgets = view_output!();
-
         let about_dialog = AboutDialog::builder()
-            .launch(widgets.main_window.upcast_ref::<gtk::Window>().clone())
+            .transient_for(root)
+            .launch(())
             .detach();
 
         let model = Self { about_dialog };
+
+        let widgets = view_output!();
 
         let actions = RelmActionGroup::<WindowActionGroup>::new();
 
