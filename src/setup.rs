@@ -9,9 +9,6 @@ pub fn setup() {
     // Initialize GTK
     gtk::init().unwrap();
 
-    // Initialize logger
-    pretty_env_logger::init();
-
     setup_gettext();
 
     glib::set_application_name(&gettext("GTK Rust Template"));
