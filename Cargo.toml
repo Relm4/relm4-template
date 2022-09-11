@@ -1,7 +1,7 @@
 [package]
 name = "gtk-rust-template"
 version = "0.1.0"
-authors = ["Bilal Elmoussaoui <bil.elmoussaoui@gmail.com>", "Relm4 maintainers"]
+authors = ["Bilal Elmoussaoui <bil.elmoussaoui@gmail.com>"]
 edition = "2021"
 publish = false
 
