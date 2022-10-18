@@ -38,7 +38,7 @@ fn main() {
             app.quit();
         })
     };
-    actions.add_action(quit_action);
+    actions.add_action(&quit_action);
 
     app.set_accelerators_for_action::<QuitAction>(&["<Control>q"]);
 

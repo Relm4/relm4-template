@@ -109,8 +109,8 @@ impl SimpleComponent for App {
             })
         };
 
-        actions.add_action(shortcuts_action);
-        actions.add_action(about_action);
+        actions.add_action(&shortcuts_action);
+        actions.add_action(&about_action);
 
         widgets
             .main_window
