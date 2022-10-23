@@ -1,7 +1,6 @@
 use gettextrs::gettext;
 use log::{debug, info};
 
-use glib::clone;
 use gtk::prelude::*;
 use gtk::subclass::prelude::*;
 use gtk::{gdk, gio, glib};
@@ -29,9 +28,10 @@ mod imp {
     impl ObjectImpl for ExampleApplication {}
 
     impl ApplicationImpl for ExampleApplication {
-        fn activate(&self, app: &Self::Type) {
+        fn activate(&self) {
             debug!("GtkApplication<ExampleApplication>::activate");
-            self.parent_activate(app);
+            self.parent_activate();
+            let app = self.instance();
 
             if let Some(window) = self.window.get() {
                 let window = window.upgrade().unwrap();
@@ -39,7 +39,7 @@ mod imp {
                 return;
             }
 
-            let window = ExampleApplicationWindow::new(app);
+            let window = ExampleApplicationWindow::new(&*app);
             self.window
                 .set(window.downgrade())
                 .expect("Window already set.");
@@ -47,9 +47,10 @@ mod imp {
             app.main_window().present();
         }
 
-        fn startup(&self, app: &Self::Type) {
+        fn startup(&self) {
             debug!("GtkApplication<ExampleApplication>::startup");
-            self.parent_startup(app);
+            self.parent_startup();
+            let app = self.instance();
 
             // Set icons for shell
             gtk::Window::set_default_icon_name(APP_ID);
@@ -70,38 +71,28 @@ glib::wrapper! {
 }
 
 impl ExampleApplication {
-    pub fn new() -> Self {
-        glib::Object::new(&[
-            ("application-id", &Some(APP_ID)),
-            ("flags", &gio::ApplicationFlags::empty()),
-            (
-                "resource-base-path",
-                &Some("/com/belmoussaoui/GtkRustTemplate/"),
-            ),
-        ])
-        .expect("Application initialization failed...")
-    }
-
     fn main_window(&self) -> ExampleApplicationWindow {
         self.imp().window.get().unwrap().upgrade().unwrap()
     }
 
     fn setup_gactions(&self) {
         // Quit
-        let action_quit = gio::SimpleAction::new("quit", None);
-        action_quit.connect_activate(clone!(@weak self as app => move |_, _| {
-            // This is needed to trigger the delete event and saving the window state
-            app.main_window().close();
-            app.quit();
-        }));
-        self.add_action(&action_quit);
+        let action_quit = gio::ActionEntry::builder("quit")
+            .activate(move |app: &Self, _, _| {
+                // This is needed to trigger the delete event and saving the window state
+                app.main_window().close();
+                app.quit();
+            })
+            .build();
 
         // About
-        let action_about = gio::SimpleAction::new("about", None);
-        action_about.connect_activate(clone!(@weak self as app => move |_, _| {
-            app.show_about_dialog();
-        }));
-        self.add_action(&action_about);
+        let action_about = gio::ActionEntry::builder("about")
+            .activate(|app: &Self, _, _| {
+                app.show_about_dialog();
+            })
+            .build();
+        self.add_action_entries([action_quit, action_about])
+            .unwrap();
     }
 
     // Sets up keyboard shortcuts
@@ -145,5 +136,15 @@ impl ExampleApplication {
         info!("Datadir: {}", PKGDATADIR);
 
         ApplicationExtManual::run(self);
+    }
+}
+
+impl Default for ExampleApplication {
+    fn default() -> Self {
+        glib::Object::new::<Self>(&[
+            ("application-id", &APP_ID),
+            ("flags", &gio::ApplicationFlags::empty()),
+            ("resource-base-path", &"/com/belmoussaoui/GtkRustTemplate/"),
+        ])
     }
 }

@@ -8,9 +8,7 @@ use crate::config::{APP_ID, PROFILE};
 mod imp {
     use super::*;
 
-    use gtk::CompositeTemplate;
-
-    #[derive(Debug, CompositeTemplate)]
+    #[derive(Debug, gtk::CompositeTemplate)]
     #[template(resource = "/com/belmoussaoui/GtkRustTemplate/ui/window.ui")]
     pub struct ExampleApplicationWindow {
         #[template_child]
@@ -34,7 +32,7 @@ mod imp {
         type ParentType = gtk::ApplicationWindow;
 
         fn class_init(klass: &mut Self::Class) {
-            Self::bind_template(klass);
+            klass.bind_template();
         }
 
         // You must call `Widget`'s `init_template()` within `instance_init()`.
@@ -44,8 +42,9 @@ mod imp {
     }
 
     impl ObjectImpl for ExampleApplicationWindow {
-        fn constructed(&self, obj: &Self::Type) {
-            self.parent_constructed(obj);
+        fn constructed(&self) {
+            self.parent_constructed();
+            let obj = self.instance();
 
             // Devel Profile
             if PROFILE == "Devel" {
@@ -60,13 +59,13 @@ mod imp {
     impl WidgetImpl for ExampleApplicationWindow {}
     impl WindowImpl for ExampleApplicationWindow {
         // Save window state on delete event
-        fn close_request(&self, window: &Self::Type) -> gtk::Inhibit {
-            if let Err(err) = window.save_window_size() {
+        fn close_request(&self) -> gtk::Inhibit {
+            if let Err(err) = self.instance().save_window_size() {
                 log::warn!("Failed to save window state, {}", &err);
             }
 
             // Pass close request on to the parent
-            self.parent_close_request(window)
+            self.parent_close_request()
         }
     }
 
@@ -82,7 +81,6 @@ glib::wrapper! {
 impl ExampleApplicationWindow {
     pub fn new(app: &ExampleApplication) -> Self {
         glib::Object::new(&[("application", app)])
-            .expect("Failed to create ExampleApplicationWindow")
     }
 
     fn save_window_size(&self) -> Result<(), glib::BoolError> {
