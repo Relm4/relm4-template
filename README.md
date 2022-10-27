@@ -1,7 +1,6 @@
 # GTK + Rust + Relm4 + Meson + Flatpak = <3
 
 > This is a fork of [gtk-rust-template](https://gitlab.gnome.org/World/Rust/gtk-rust-template) that adapts the code for Relm4 while trying to change as little as possible.
-> NOTE: THIS IS STILL WIP
 
 A boilerplate template to get started with GTK, Rust, Meson, Flatpak made for GNOME. It can be adapted for other desktop environments like elementary.
 
