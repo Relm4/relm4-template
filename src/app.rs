@@ -105,7 +105,7 @@ impl SimpleComponent for App {
         let about_action = {
             let sender = model.about_dialog.sender().clone();
             RelmAction::<AboutAction>::new_stateless(move |_| {
-                sender.send(());
+                sender.send(()).unwrap();
             })
         };
 
