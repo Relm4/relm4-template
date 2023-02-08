@@ -14,7 +14,7 @@ flatpak:
     APP_ID: "com.belmoussaoui.GtkRustTemplate.Devel"
     RUNTIME_REPO: "https://nightly.gnome.org/gnome-nightly.flatpakrepo"
   script:
-    - flatpak install --user --noninteractive org.freedesktop.Sdk.Extension.llvm14//21.08
+    - flatpak install --user --noninteractive org.freedesktop.Sdk.Extension.llvm15//22.08
     - >
       xvfb-run -a -s "-screen 0 1024x768x24"
       flatpak-builder --keep-build-dirs --user --disable-rofiles-fuse flatpak_app --repo=repo ${BRANCH:+--default-branch=$BRANCH} ${MANIFEST_PATH}
