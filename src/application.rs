@@ -39,7 +39,7 @@ mod imp {
                 return;
             }
 
-            let window = ExampleApplicationWindow::new(&*app);
+            let window = ExampleApplicationWindow::new(&app);
             self.window
                 .set(window.downgrade())
                 .expect("Window already set.");
@@ -121,7 +121,7 @@ impl ExampleApplication {
             // .website("https://gitlab.gnome.org/bilelmoussaoui/gtk-rust-template/")
             .version(VERSION)
             .transient_for(&self.main_window())
-            .translator_credits(&gettext("translator-credits"))
+            .translator_credits(gettext("translator-credits"))
             .modal(true)
             .authors(vec!["Bilal Elmoussaoui"])
             .artists(vec!["Bilal Elmoussaoui"])
