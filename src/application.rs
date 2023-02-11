@@ -31,7 +31,7 @@ mod imp {
         fn activate(&self) {
             debug!("GtkApplication<ExampleApplication>::activate");
             self.parent_activate();
-            let app = self.instance();
+            let app = self.obj();
 
             if let Some(window) = self.window.get() {
                 let window = window.upgrade().unwrap();
@@ -50,7 +50,7 @@ mod imp {
         fn startup(&self) {
             debug!("GtkApplication<ExampleApplication>::startup");
             self.parent_startup();
-            let app = self.instance();
+            let app = self.obj();
 
             // Set icons for shell
             gtk::Window::set_default_icon_name(APP_ID);
@@ -91,8 +91,7 @@ impl ExampleApplication {
                 app.show_about_dialog();
             })
             .build();
-        self.add_action_entries([action_quit, action_about])
-            .unwrap();
+        self.add_action_entries([action_quit, action_about]);
     }
 
     // Sets up keyboard shortcuts
@@ -124,28 +123,27 @@ impl ExampleApplication {
             .transient_for(&self.main_window())
             .translator_credits(&gettext("translator-credits"))
             .modal(true)
-            .authors(vec!["Bilal Elmoussaoui".into()])
-            .artists(vec!["Bilal Elmoussaoui".into()])
+            .authors(vec!["Bilal Elmoussaoui"])
+            .artists(vec!["Bilal Elmoussaoui"])
             .build();
 
         dialog.present();
     }
 
-    pub fn run(&self) {
+    pub fn run(&self) -> glib::ExitCode {
         info!("GTK Rust Template ({})", APP_ID);
         info!("Version: {} ({})", VERSION, PROFILE);
         info!("Datadir: {}", PKGDATADIR);
 
-        ApplicationExtManual::run(self);
+        ApplicationExtManual::run(self)
     }
 }
 
 impl Default for ExampleApplication {
     fn default() -> Self {
-        glib::Object::new::<Self>(&[
-            ("application-id", &APP_ID),
-            ("flags", &gio::ApplicationFlags::empty()),
-            ("resource-base-path", &"/com/belmoussaoui/GtkRustTemplate/"),
-        ])
+        glib::Object::builder()
+            .property("application-id", APP_ID)
+            .property("resource-base-path", "/com/belmoussaoui/GtkRustTemplate/")
+            .build()
     }
 }

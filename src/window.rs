@@ -44,7 +44,7 @@ mod imp {
     impl ObjectImpl for ExampleApplicationWindow {
         fn constructed(&self) {
             self.parent_constructed();
-            let obj = self.instance();
+            let obj = self.obj();
 
             // Devel Profile
             if PROFILE == "Devel" {
@@ -60,7 +60,7 @@ mod imp {
     impl WindowImpl for ExampleApplicationWindow {
         // Save window state on delete event
         fn close_request(&self) -> gtk::Inhibit {
-            if let Err(err) = self.instance().save_window_size() {
+            if let Err(err) = self.obj().save_window_size() {
                 log::warn!("Failed to save window state, {}", &err);
             }
 
@@ -80,7 +80,7 @@ glib::wrapper! {
 
 impl ExampleApplicationWindow {
     pub fn new(app: &ExampleApplication) -> Self {
-        glib::Object::new(&[("application", app)])
+        glib::Object::builder().property("application", app).build()
     }
 
     fn save_window_size(&self) -> Result<(), glib::BoolError> {

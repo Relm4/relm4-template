@@ -9,7 +9,7 @@ use gtk::{gio, glib};
 use self::application::ExampleApplication;
 use self::config::{GETTEXT_PACKAGE, LOCALEDIR, RESOURCES_FILE};
 
-fn main() {
+fn main() -> glib::ExitCode {
     // Initialize logger
     pretty_env_logger::init();
 
@@ -24,5 +24,5 @@ fn main() {
     gio::resources_register(&res);
 
     let app = ExampleApplication::default();
-    app.run();
+    app.run()
 }
