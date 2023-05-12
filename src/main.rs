@@ -11,7 +11,7 @@ use self::config::{GETTEXT_PACKAGE, LOCALEDIR, RESOURCES_FILE};
 
 fn main() -> glib::ExitCode {
     // Initialize logger
-    pretty_env_logger::init();
+    tracing_subscriber::fmt::init();
 
     // Prepare i18n
     gettextrs::setlocale(LocaleCategory::LcAll, "");

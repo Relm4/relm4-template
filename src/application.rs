@@ -1,5 +1,5 @@
 use gettextrs::gettext;
-use log::{debug, info};
+use tracing::{debug, info};
 
 use gtk::prelude::*;
 use gtk::subclass::prelude::*;
