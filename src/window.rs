@@ -54,6 +54,10 @@ mod imp {
             // Load latest window state
             obj.load_window_size();
         }
+
+        fn dispose(&self) {
+            self.dispose_template();
+        }
     }
 
     impl WidgetImpl for ExampleApplicationWindow {}
