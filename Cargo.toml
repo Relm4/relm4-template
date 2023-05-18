@@ -8,6 +8,9 @@ publish = false
 [profile.release]
 lto = true
 
+[profile.release]
+lto = true
+
 [dependencies]
 gettext-rs = { version = "0.7", features = ["gettext-system"] }
 tracing = "0.1"
