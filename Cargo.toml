@@ -5,6 +5,9 @@ authors = ["Bilal Elmoussaoui <bil.elmoussaoui@gmail.com>"]
 edition = "2021"
 publish = false
 
+[profile.release]
+lto = true
+
 [dependencies]
 gettext-rs = { version = "0.7", features = ["gettext-system"] }
 tracing = "0.1"
