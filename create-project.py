@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import os
+import sys
 import subprocess
 import shutil
 from pathlib import Path
@@ -43,6 +44,7 @@ project_dir = current_dir / project_name
 files_url = "https://github.com/Relm4/relm4-template/archive/refs/tags/v0.1.0.zip"
 zip_path = current_dir / "relm4-template.zip"
 template_path = current_dir / "relm4-template-0.1.0"
+online = len(sys.argv) >= 2 and sys.argv[1] == "--online"
 
 CURRENT_APP_ID = "com.belmoussaoui.GtkRustTemplate"
 CURRENT_PROJECT_NAME = "gtk-rust-template"
@@ -65,20 +67,21 @@ if project_dir.is_dir():
     else:
         exit()
 
-zip_destination, _ = urllib.request.urlretrieve(files_url, current_dir / "relm4-template.zip")
+if online:
+    zip_destination, _ = urllib.request.urlretrieve(files_url, current_dir / "relm4-template.zip")
 
-with zipfile.ZipFile(zip_destination, 'r') as zip_ref:
-    zip_ref.extractall(current_dir)
+    with zipfile.ZipFile(zip_destination, 'r') as zip_ref:
+        zip_ref.extractall(current_dir)
 
-os.remove(zip_destination)
+    os.remove(zip_destination)
 
-for item in os.listdir(template_path):
-    item_path = os.path.join(template_path, item)
-    if "create-project.py" not in item_path:
-        remove_path = os.path.join(current_dir, item)
-        shutil.move(item_path, remove_path)
+    for item in os.listdir(template_path):
+        item_path = os.path.join(template_path, item)
+        if "create-project.py" not in item_path:
+            remove_path = os.path.join(current_dir, item)
+            shutil.move(item_path, remove_path)
 
-shutil.rmtree(template_path)
+    shutil.rmtree(template_path)
 
 items_to_copy = [
     Path(".github"),
@@ -161,33 +164,34 @@ subprocess.call(["git", "add", "-A"], cwd=project_dir)
 subprocess.call(["git", "commit", "-m", "Init with GTK Rust Template"], cwd=project_dir)
 
 items_to_delete = [
-    Path(".flatpak-builder"),
-    Path(".github"),
-    Path("build-aux"),
-    Path("data"),
-    Path("hooks"),
-    Path("po"),
-    Path("src"),
-    Path(".editorconfig"),
-    Path(".gitignore"),
-    Path(".gitlab-ci.yml"),
-    Path("Cargo.lock"),
-    Path("Cargo.toml"),
-    Path("LICENSE.md"),
-    Path("README.md"),
-    Path("create-project.py"),
-    Path("meson.build"),
-    Path("meson_options.txt"),
+    ".flatpak-builder",
+    ".github",
+    "build-aux",
+    "data",
+    "hooks",
+    "po",
+    "src",
+    ".editorconfig",
+    ".gitignore",
+    ".gitlab-ci.yml",
+    "Cargo.lock",
+    "Cargo.toml",
+    "LICENSE.md",
+    "README.md",
+    "create-project.py",
+    "meson.build",
+    "meson_options.txt",
 ]
 
-for item in items_to_delete:
-    item_path = os.path.join(current_dir, item)
-    if "create-project.py" not in item_path and project_name not in item_path:
-        remove_path = current_dir / item
-        if remove_path.is_dir():
-            shutil.rmtree(remove_path)
-        else:
-            os.remove(remove_path)
+if online:
+    for item in items_to_delete:
+        item_path = os.path.join(current_dir, item)
+        if "create-project.py" not in item_path and project_name not in item_path:
+            remove_path = current_dir / item
+            if remove_path.is_dir():
+                shutil.rmtree(remove_path)
+            else:
+                os.remove(remove_path)
 
 current_os = platform.system()
 
