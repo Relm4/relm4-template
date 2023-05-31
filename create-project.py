@@ -4,14 +4,29 @@ import os
 import subprocess
 import shutil
 from pathlib import Path
-
+import urllib.request
+import zipfile
+import subprocess
+import platform
 
 print("Welcome to GTK Rust Template")
-name = input("Name (e.g. My Awesome App): ")
-project_name = input("Project Name (e.g. my-awesome-app): ")
-app_id = input(
-    "Application ID (e.g. org.domain.MyAwesomeApp, see: https://developer.gnome.org/documentation/tutorials/application-id.html ): "
-)
+while True:
+    name = input("Name (e.g. My Awesome App): ")
+    if len(name) > 0:
+        break
+while True:
+    project_name = input("Project Name (e.g. my-awesome-app): ")
+    if len(project_name) > 0:
+        break
+
+while True:
+    app_id = input(
+        "Application ID (e.g. org.domain.MyAwesomeApp, see: https://developer.gnome.org/documentation/tutorials/application-id.html ): "
+    )
+    if len(app_id) > 0:
+        break
+
+
 for segment in app_id.split(".")[:-1]:
     if "-" in segment:
         exit("App Id might only contain '-' in the last segment")
@@ -22,7 +37,12 @@ update_contact = input("Email: ")
 project_name_alt = project_name.replace("-", "_")
 
 app_path = "/" + "/".join(app_id.split(".")) + "/"
-project_dir = Path(__file__).parent / project_name
+current_dir = Path(os.getcwd())
+project_dir = current_dir / project_name
+
+files_url = "https://github.com/Relm4/relm4-template/archive/refs/tags/v0.1.0.zip"
+zip_path = current_dir / "relm4-template.zip"
+template_path = current_dir / "relm4-template-0.1.0"
 
 CURRENT_APP_ID = "com.belmoussaoui.GtkRustTemplate"
 CURRENT_PROJECT_NAME = "gtk-rust-template"
@@ -45,6 +65,20 @@ if project_dir.is_dir():
     else:
         exit()
 
+zip_destination, _ = urllib.request.urlretrieve(files_url, current_dir / "relm4-template.zip")
+
+with zipfile.ZipFile(zip_destination, 'r') as zip_ref:
+    zip_ref.extractall(current_dir)
+
+os.remove(zip_destination)
+
+for item in os.listdir(template_path):
+    item_path = os.path.join(template_path, item)
+    if "create-project.py" not in item_path:
+        remove_path = os.path.join(current_dir, item)
+        shutil.move(item_path, remove_path)
+
+shutil.rmtree(template_path)
 
 items_to_copy = [
     Path(".github"),
@@ -125,3 +159,44 @@ subprocess.call(["git", "init"], cwd=project_dir)
 # Add all files and commit them
 subprocess.call(["git", "add", "-A"], cwd=project_dir)
 subprocess.call(["git", "commit", "-m", "Init with GTK Rust Template"], cwd=project_dir)
+
+items_to_delete = [
+    Path(".flatpak-builder"),
+    Path(".github"),
+    Path("build-aux"),
+    Path("data"),
+    Path("hooks"),
+    Path("po"),
+    Path("src"),
+    Path(".editorconfig"),
+    Path(".gitignore"),
+    Path(".gitlab-ci.yml"),
+    Path("Cargo.lock"),
+    Path("Cargo.toml"),
+    Path("LICENSE.md"),
+    Path("README.md"),
+    Path("create-project.py"),
+    Path("meson.build"),
+    Path("meson_options.txt"),
+]
+
+for item in items_to_delete:
+    item_path = os.path.join(current_dir, item)
+    if "create-project.py" not in item_path and project_name not in item_path:
+        remove_path = current_dir / item
+        if remove_path.is_dir():
+            shutil.rmtree(remove_path)
+        else:
+            os.remove(remove_path)
+
+current_os = platform.system()
+
+if current_os == "Windows":
+    subprocess.Popen(f'explorer "{current_dir}"')
+elif current_os == "Darwin":  # macOS
+    subprocess.Popen(["open", current_dir])
+elif current_os == "Linux":
+    subprocess.Popen(["xdg-open", current_dir])
+else:
+    print("Failed to open project path, unsupported operating system.")
+    print("Created project at: " + current_dir)
