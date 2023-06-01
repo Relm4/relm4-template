@@ -32,10 +32,16 @@ The template ships a simple python script to init a project easily. It asks you 
 
 The script requires having `git` installed on your system.
 
-You can run it with,
+If you clone this repository, you can run it with:
 
 ```shell
 python3 create-project.py
+```
+
+If you don't want to clone the repository, you can run it with:
+
+```shell
+python3 -c "$(wget -q -O - https://raw.githubusercontent.com/Relm4/relm4-template/main/create-project.py)" --online
 ```
 
 ```shell
