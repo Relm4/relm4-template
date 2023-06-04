@@ -93,7 +93,7 @@ impl SimpleComponent for App {
 
         let widgets = view_output!();
 
-        let actions = RelmActionGroup::<WindowActionGroup>::new();
+        let mut actions = RelmActionGroup::<WindowActionGroup>::new();
 
         let shortcuts_action = {
             let shortcuts = widgets.shortcuts.clone();
@@ -109,8 +109,8 @@ impl SimpleComponent for App {
             })
         };
 
-        actions.add_action(&shortcuts_action);
-        actions.add_action(&about_action);
+        actions.add_action(shortcuts_action);
+        actions.add_action(about_action);
 
         widgets
             .main_window

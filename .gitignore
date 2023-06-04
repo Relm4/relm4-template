@@ -10,3 +10,4 @@
 /.flatpak/
 /vendor
 /.vscode
+.flatpak-builder/

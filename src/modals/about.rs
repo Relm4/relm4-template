@@ -1,5 +1,5 @@
 use gtk::prelude::GtkWindowExt;
-use relm4::{gtk, ComponentParts, ComponentSender, SimpleComponent};
+use relm4::{adw, gtk, ComponentParts, ComponentSender, SimpleComponent};
 
 use gettextrs::gettext;
 
@@ -9,23 +9,25 @@ pub struct AboutDialog {}
 
 impl SimpleComponent for AboutDialog {
     type Init = ();
-    type Widgets = gtk::AboutDialog;
+    type Widgets = adw::AboutWindow;
     type Input = ();
     type Output = ();
-    type Root = gtk::AboutDialog;
+    type Root = adw::AboutWindow;
 
     fn init_root() -> Self::Root {
-        gtk::AboutDialog::builder()
-            .logo_icon_name(APP_ID)
+        adw::AboutWindow::builder()
+            .application_icon(APP_ID)
             // Insert your license of choice here
             // .license_type(gtk::License::MitX11)
             // Insert your website here
             // .website("https://gitlab.gnome.org/bilelmoussaoui/gtk-rust-template/")
+            // Insert your Issues page
+            // .issue_url("https://gitlab.gnome.org/World/Rust/gtk-rust-template/-/issues")
             .version(VERSION)
-            .translator_credits(&gettext("translator-credits"))
-            .modal(true)
-            .authors(vec!["Bilal Elmoussaoui".into()])
-            .artists(vec!["Bilal Elmoussaoui".into()])
+            .translator_credits(String::from("translator-credits"))
+            .copyright("© 2023 Bilal Elmoussaoui")
+            .developers(vec![String::from("Bilal Elmoussaoui")])
+            .designers(vec![String::from("Bilal Elmoussaoui")])
             .build()
     }
 
