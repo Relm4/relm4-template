@@ -13,8 +13,6 @@ use relm4::{
 use app::App;
 use setup::setup;
 
-use crate::config::APP_ID;
-
 relm4::new_action_group!(AppActionGroup, "app");
 relm4::new_stateless_action!(QuitAction, AppActionGroup, "quit");
 
@@ -39,10 +37,9 @@ fn main() {
         })
     };
     actions.add_action(quit_action);
+    actions.register_for_main_application();
 
     app.set_accelerators_for_action::<QuitAction>(&["<Control>q"]);
-
-    app.set_action_group(Some(&actions.into_action_group()));
 
     let app = RelmApp::from_app(app);
 

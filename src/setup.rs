@@ -1,7 +1,7 @@
 use relm4::gtk;
 
 use gettextrs::{gettext, LocaleCategory};
-use gtk::{gdk, gio, glib};
+use gtk::{gio, glib};
 
 use crate::config::{APP_ID, GETTEXT_PACKAGE, LOCALEDIR, RESOURCES_FILE};
 
@@ -16,7 +16,7 @@ pub fn setup() {
     let res = gio::Resource::load(RESOURCES_FILE).expect("Could not load gresource file");
     gio::resources_register(&res);
 
-    setup_css();
+    setup_css(&res);
 
     gtk::Window::set_default_icon_name(APP_ID);
 }
@@ -28,14 +28,12 @@ fn setup_gettext() {
     gettextrs::textdomain(GETTEXT_PACKAGE).expect("Unable to switch to the text domain");
 }
 
-fn setup_css() {
-    let provider = gtk::CssProvider::new();
-    provider.load_from_resource("/com/belmoussaoui/GtkRustTemplate/style.css");
-    if let Some(display) = gdk::Display::default() {
-        gtk::StyleContext::add_provider_for_display(
-            &display,
-            &provider,
-            gtk::STYLE_PROVIDER_PRIORITY_APPLICATION,
-        );
-    }
+fn setup_css(res: &gio::Resource) {
+    let data = res
+        .lookup_data(
+            "/com/belmoussaoui/GtkRustTemplate/style.css",
+            gio::ResourceLookupFlags::NONE,
+        )
+        .unwrap();
+    relm4::set_global_css(&glib::GString::from_utf8_checked(data.to_vec()).unwrap());
 }

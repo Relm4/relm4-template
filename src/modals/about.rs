@@ -1,8 +1,6 @@
 use gtk::prelude::GtkWindowExt;
 use relm4::{adw, gtk, ComponentParts, ComponentSender, SimpleComponent};
 
-use gettextrs::gettext;
-
 use crate::config::{APP_ID, VERSION};
 
 pub struct AboutDialog {}
@@ -23,11 +21,13 @@ impl SimpleComponent for AboutDialog {
             // .website("https://gitlab.gnome.org/bilelmoussaoui/gtk-rust-template/")
             // Insert your Issues page
             // .issue_url("https://gitlab.gnome.org/World/Rust/gtk-rust-template/-/issues")
+            // Insert your application name here
+            .application_name("Relm4-template")
             .version(VERSION)
-            .translator_credits(String::from("translator-credits"))
+            .translator_credits("translator-credits")
             .copyright("© 2023 Bilal Elmoussaoui")
-            .developers(vec![String::from("Bilal Elmoussaoui")])
-            .designers(vec![String::from("Bilal Elmoussaoui")])
+            .developers(vec!["Bilal Elmoussaoui"])
+            .designers(vec!["Bilal Elmoussaoui"])
             .build()
     }
 
