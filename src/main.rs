@@ -1,6 +1,10 @@
+mod config {
+    #![allow(dead_code)]
+
+    include!(concat!(env!("CODEGEN_BUILD_DIR"), "/config.rs"));
+}
+
 mod application;
-#[rustfmt::skip]
-mod config;
 mod window;
 
 use gettextrs::{gettext, LocaleCategory};
