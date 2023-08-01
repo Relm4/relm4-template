@@ -8,11 +8,8 @@ publish = false
 [profile.release]
 lto = true
 
-[profile.release]
-lto = true
-
 [dependencies]
 gettext-rs = { version = "0.7", features = ["gettext-system"] }
-tracing = "0.1"
+tracing = "0.1.37"
 tracing-subscriber = "0.3"
 relm4 = { version = "0.6.2", features = ["libadwaita", "gnome_44"] }
