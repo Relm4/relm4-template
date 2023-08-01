@@ -11,7 +11,7 @@ use crate::window::ExampleApplicationWindow;
 mod imp {
     use super::*;
     use glib::WeakRef;
-    use once_cell::sync::OnceCell;
+    use std::cell::OnceCell;
 
     #[derive(Debug, Default)]
     pub struct ExampleApplication {
@@ -104,7 +104,7 @@ impl ExampleApplication {
         let provider = gtk::CssProvider::new();
         provider.load_from_resource("/com/belmoussaoui/GtkRustTemplate/style.css");
         if let Some(display) = gdk::Display::default() {
-            gtk::StyleContext::add_provider_for_display(
+            gtk::style_context_add_provider_for_display(
                 &display,
                 &provider,
                 gtk::STYLE_PROVIDER_PRIORITY_APPLICATION,
