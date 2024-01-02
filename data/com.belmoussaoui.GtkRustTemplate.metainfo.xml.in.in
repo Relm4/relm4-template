@@ -18,7 +18,7 @@
   </screenshots>
   <url type="homepage">https://gitlab.gnome.org/bilelmoussaoui/gtk-rust-template</url>
   <url type="bugtracker">https://gitlab.gnome.org/bilelmoussaoui/gtk-rust-template/issues</url>
-  <content_rating type="oars-1.0" />
+  <content_rating type="oars-1.1" />
   <releases>
     <release version="0.1.0" date="2019-07-11" />
   </releases>
