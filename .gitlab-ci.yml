@@ -35,6 +35,9 @@ rustfmt:
   image: "rust:slim"
   script:
     - rustup component add rustfmt
+    # Create blank versions of our configured files
+    # so rustfmt does not yell about non-existent files or completely empty files
+    - echo -e "" >> src/config.rs
     - rustc -Vv && cargo -Vv
     - cargo fmt --version
     - cargo fmt --all -- --color=always --check
