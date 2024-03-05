@@ -13,7 +13,7 @@ impl SimpleComponent for AboutDialog {
     type Root = adw::AboutWindow;
 
     fn init_root() -> Self::Root {
-        adw::AboutWindow::builder()
+        let about_window = adw::AboutWindow::builder()
             .application_icon(APP_ID)
             // Insert your license of choice here
             // .license_type(gtk::License::MitX11)
@@ -28,7 +28,10 @@ impl SimpleComponent for AboutDialog {
             .copyright("© 2023 Bilal Elmoussaoui")
             .developers(vec!["Bilal Elmoussaoui"])
             .designers(vec!["Bilal Elmoussaoui"])
-            .build()
+            .build();
+
+        about_window.set_hide_on_close(true);
+        about_window
     }
 
     fn init(
@@ -47,3 +50,4 @@ impl SimpleComponent for AboutDialog {
         dialog.present();
     }
 }
+
