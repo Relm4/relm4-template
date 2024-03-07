@@ -50,4 +50,3 @@ impl SimpleComponent for AboutDialog {
         dialog.present();
     }
 }
-
