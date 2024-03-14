@@ -28,12 +28,13 @@ impl SimpleComponent for AboutDialog {
             .copyright("© 2023 Bilal Elmoussaoui")
             .developers(vec!["Bilal Elmoussaoui"])
             .designers(vec!["Bilal Elmoussaoui"])
+            .hide_on_close(true)
             .build()
     }
 
     fn init(
         _: Self::Init,
-        root: &Self::Root,
+        root: Self::Root,
         _sender: ComponentSender<Self>,
     ) -> ComponentParts<Self> {
         let model = Self {};

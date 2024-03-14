@@ -45,9 +45,11 @@ impl SimpleComponent for App {
 
     view! {
         main_window = adw::ApplicationWindow::new(&main_application()) {
+            set_visible: true,
+
             connect_close_request[sender] => move |_| {
                 sender.input(AppMsg::Quit);
-                gtk::Inhibit(true)
+                glib::Propagation::Stop
             },
 
             #[wrap(Some)]
@@ -88,11 +90,11 @@ impl SimpleComponent for App {
 
     fn init(
         _init: Self::Init,
-        root: &Self::Root,
+        root: Self::Root,
         sender: ComponentSender<Self>,
     ) -> ComponentParts<Self> {
         let about_dialog = AboutDialog::builder()
-            .transient_for(root)
+            .transient_for(&root)
             .launch(())
             .detach();
 
