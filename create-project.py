@@ -116,7 +116,6 @@ files_with_content_to_rename = [
     Path("po") / "POTFILES.in",
     Path("src") / "app.rs",
     Path("src") / "main.rs",
-    Path("src") / "setup.rs",
     Path("src") / "modals" / "about.rs",
     Path("Cargo.toml"),
     Path("meson.build"),
