@@ -3,7 +3,7 @@ stages:
   - test
 
 flatpak:
-  image: 'quay.io/gnome_infrastructure/gnome-runtime-images:gnome-45'
+  image: 'quay.io/gnome_infrastructure/gnome-runtime-images:gnome-46'
   stage: test
   tags:
     - flatpak

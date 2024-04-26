@@ -66,11 +66,9 @@ configure_file(
 )
 
 # Validata GSchema
-if glib_compile_schemas.found()
-  test(
-    'validate-gschema', glib_compile_schemas,
-    args: [
-      '--strict', '--dry-run', meson.current_build_dir()
-    ],
-  )
-endif
+test(
+  'validate-gschema', glib_compile_schemas,
+  args: [
+    '--strict', '--dry-run', meson.current_build_dir()
+  ],
+)
