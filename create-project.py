@@ -41,9 +41,9 @@ app_path = "/" + "/".join(app_id.split(".")) + "/"
 current_dir = Path(os.getcwd())
 project_dir = current_dir / project_name
 
-files_url = "https://github.com/Relm4/relm4-template/archive/refs/tags/v0.1.1.zip"
+files_url = "https://github.com/Relm4/relm4-template/archive/refs/tags/v0.1.2.zip"
 zip_path = current_dir / "relm4-template.zip"
-template_path = current_dir / "relm4-template-0.1.1"
+template_path = current_dir / "relm4-template-0.1.2"
 online = len(sys.argv) >= 2 and sys.argv[1] == "--online"
 
 CURRENT_APP_ID = "com.belmoussaoui.GtkRustTemplate"
