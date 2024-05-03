@@ -18,6 +18,13 @@
   </screenshots>
   <url type="homepage">https://gitlab.gnome.org/bilelmoussaoui/gtk-rust-template</url>
   <url type="bugtracker">https://gitlab.gnome.org/bilelmoussaoui/gtk-rust-template/issues</url>
+  <!-- Source code repository -->
+  <url type="vcs-browser">https://gitlab.gnome.org/bilelmoussaoui/gtk-rust-template</url>
+  <!-- Translation repository -->
+  <url type="translate">https://gitlab.gnome.org/bilelmoussaoui/gtk-rust-template/-/tree/master/po</url>
+  <!-- Open Age Ratings Service:
+       https://hughsie.github.io/oars/generate.html
+  -->
   <content_rating type="oars-1.1" />
   <releases>
     <release version="0.1.0" date="2019-07-11" />
@@ -31,11 +38,19 @@
      <kudo>HiDpiIcon</kudo>
   </kudos>
   <!-- developer_name tag deprecated with Appstream 1.0 -->
-  <developer_name translatable="no">Bilal Elmoussaoui</developer_name>
+  <developer_name translate="no">Bilal Elmoussaoui</developer_name>
   <!-- Introduced with Appstream 1.0, but not yet fully supported by corresponding projects -->
   <developer id="gnome.org">
-    <name translatable="no">Bilal Elmoussaoui</name>
+    <name translate="no">Bilal Elmoussaoui</name>
   </developer>
+  <!-- 
+    Branding colors:
+    https://docs.flathub.org/docs/for-app-authors/metainfo-guidelines/#brand-color
+  -->
+  <branding>
+    <color type="primary" scheme_preference="light">#ff00ff</color>
+    <color type="primary" scheme_preference="dark">#993d3d</color>
+  </branding>  
   <update_contact>bil.elmoussaoui@gmail.com</update_contact>
   <translation type="gettext">@gettext-package@</translation>
   <launchable type="desktop-id">@app-id@.desktop</launchable>
