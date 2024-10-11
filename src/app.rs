@@ -1,7 +1,6 @@
 use relm4::{
     actions::{RelmAction, RelmActionGroup},
-    adw, gtk, main_application, Component, ComponentController, ComponentParts, ComponentSender,
-    Controller, SimpleComponent,
+    adw, gtk, main_application, Component, ComponentParts, ComponentSender, SimpleComponent,
 };
 
 use gtk::prelude::{
@@ -12,9 +11,7 @@ use gtk::{gio, glib};
 use crate::config::{APP_ID, PROFILE};
 use crate::modals::about::AboutDialog;
 
-pub(super) struct App {
-    about_dialog: Controller<AboutDialog>,
-}
+pub(super) struct App {}
 
 #[derive(Debug)]
 pub(super) enum AppMsg {
@@ -93,12 +90,7 @@ impl SimpleComponent for App {
         root: Self::Root,
         sender: ComponentSender<Self>,
     ) -> ComponentParts<Self> {
-        let about_dialog = AboutDialog::builder()
-            .transient_for(&root)
-            .launch(())
-            .detach();
-
-        let model = Self { about_dialog };
+        let model = Self {};
 
         let widgets = view_output!();
 
@@ -112,9 +104,8 @@ impl SimpleComponent for App {
         };
 
         let about_action = {
-            let sender = model.about_dialog.sender().clone();
             RelmAction::<AboutAction>::new_stateless(move |_| {
-                sender.send(()).unwrap();
+                AboutDialog::builder().launch(()).detach();
             })
         };
 
