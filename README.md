@@ -73,6 +73,28 @@ Once the project is build, run the command below. Replace Replace `<application_
 flatpak-builder --run flatpak_app build-aux/<application_id>.Devel.json <project_name>
 ```
 
+## Translations with Gettext
+
+The template uses `gettext` as a framework for translations using [`gettext-rs`](https://github.com/gettext-rs/gettext-rs). The basic files for this can be found in the `po` folder.
+While meson will take care of building the translations the extraction and translation itself has to be done manually.
+
+### Extracting translatable strings
+
+First of all you have to have `gettext` installed on your system. With that you then are able to use `xgettext` as following to extract the translatable strings:
+
+```shell
+xgettext --package-name=<project_name> --package-version=main --msgid-bugs-address=https://github.com/<project_name>/<project_name>/issues --files-from=po/POTFILES.in --output=po/<project_name>.pot
+```
+
+Note that you might need to update the `po/POTFILES.in` file to reflect the files of your process. This describes where `xgettext` is going to search for strings to translate.
+
+### Translating the translatable strings
+
+To translate the strings you need to use po files. Tools like Poedit allow you to generate these from the `po/<project_name>.pot` file.
+It also allows you to sync the `po/<project_name>.pot` when you rerun `xgettext`.
+
+When adding a po file also make sure to add the language code to `po/LINGUAS`.
+
 ## Community
 
 Join the GNOME and gtk-rs community!
