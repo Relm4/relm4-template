@@ -11,3 +11,5 @@
 /vendor
 /.vscode
 .flatpak-builder/
+result
+.direnv
