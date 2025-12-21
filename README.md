@@ -61,7 +61,7 @@ A new directory named `contrast` containing the generated project
 Make sure you have `flatpak` and `flatpak-builder` installed. Then run the commands below. Replace `<application_id>` with the value you entered during project creation. Please note that these commands are just for demonstration purposes. Normally this would be handled by your IDE, such as GNOME Builder or VS Code with the Flatpak extension.
 
 ```shell
-flatpak install --user org.gnome.Sdk//46 org.gnome.Platform//46  org.freedesktop.Sdk.Extension.rust-stable//23.08 org.freedesktop.Sdk.Extension.llvm16//23.08
+flatpak install --user org.gnome.Sdk//49 org.gnome.Platform//49  org.freedesktop.Sdk.Extension.rust-stable//24.08 org.freedesktop.Sdk.Extension.llvm18//23.08
 flatpak-builder --user flatpak_app build-aux/<application_id>.Devel.json
 ```
 
