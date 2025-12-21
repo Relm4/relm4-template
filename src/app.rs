@@ -3,9 +3,7 @@ use relm4::{
     adw, gtk, main_application, Component, ComponentParts, ComponentSender, SimpleComponent,
 };
 
-use gtk::prelude::{
-    ApplicationExt, GtkWindowExt, OrientableExt, SettingsExt, WidgetExt,
-};
+use gtk::prelude::{ApplicationExt, GtkWindowExt, OrientableExt, SettingsExt, WidgetExt};
 use gtk::{gio, glib};
 
 use crate::config::{APP_ID, PROFILE};
@@ -98,13 +96,13 @@ impl SimpleComponent for App {
                 AboutDialog::builder().launch(()).detach();
             })
         };
-        
+
         let quit_action = {
             RelmAction::<QuitAction>::new_stateless(move |_| {
                 sender.input(AppMsg::Quit);
             })
         };
-        
+
         // Connect action with hotkeys
         app.set_accelerators_for_action::<QuitAction>(&["<Control>q"]);
 
