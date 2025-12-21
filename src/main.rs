@@ -7,10 +7,7 @@ use config::{APP_ID, GETTEXT_PACKAGE, LOCALEDIR, RESOURCES_FILE};
 use gettextrs::{gettext, LocaleCategory};
 use gtk::prelude::ApplicationExt;
 use gtk::{gio, glib};
-use relm4::{
-    actions::{AccelsPlus, RelmAction, RelmActionGroup},
-    gtk, main_application, RelmApp,
-};
+use relm4::{gtk, main_application, RelmApp};
 
 use app::App;
 
@@ -40,19 +37,6 @@ fn main() {
 
     let app = main_application();
     app.set_resource_base_path(Some("/com/belmoussaoui/GtkRustTemplate/"));
-
-    let mut actions = RelmActionGroup::<AppActionGroup>::new();
-
-    let quit_action = {
-        let app = app.clone();
-        RelmAction::<QuitAction>::new_stateless(move |_| {
-            app.quit();
-        })
-    };
-    actions.add_action(quit_action);
-    actions.register_for_main_application();
-
-    app.set_accelerators_for_action::<QuitAction>(&["<Control>q"]);
 
     let app = RelmApp::from_app(app);
 
