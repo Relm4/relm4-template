@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
 
 import os
-import sys
-import subprocess
+import platform
 import shutil
-from pathlib import Path
+import subprocess
+import sys
 import urllib.request
 import zipfile
-import subprocess
-import platform
+from pathlib import Path
 
 print("Welcome to GTK Rust Template")
 while True:
@@ -68,9 +67,11 @@ if project_dir.is_dir():
         exit()
 
 if online:
-    zip_destination, _ = urllib.request.urlretrieve(files_url, current_dir / "relm4-template.zip")
+    zip_destination, _ = urllib.request.urlretrieve(
+        files_url, current_dir / "relm4-template.zip"
+    )
 
-    with zipfile.ZipFile(zip_destination, 'r') as zip_ref:
+    with zipfile.ZipFile(zip_destination, "r") as zip_ref:
         zip_ref.extractall(current_dir)
 
     os.remove(zip_destination)
@@ -153,7 +154,9 @@ files_to_rename = [
 
 for file in files_to_rename:
     current_path = project_dir / file
-    new_path = project_dir / file.parent / str(file.name).replace(CURRENT_APP_ID, app_id)
+    new_path = (
+        project_dir / file.parent / str(file.name).replace(CURRENT_APP_ID, app_id)
+    )
     shutil.move(current_path, new_path)
 
 
@@ -202,4 +205,4 @@ elif current_os == "Linux":
     subprocess.Popen(["xdg-open", current_dir])
 else:
     print("Failed to open project path, unsupported operating system.")
-    print("Created project at: " + current_dir)
+    print("Created project at: ", current_dir)

@@ -30,6 +30,7 @@ in
       ninja
       parted
       gettext
+      appstream
       pkg-config
       gdk-pixbuf
       libadwaita
