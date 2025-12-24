@@ -43,7 +43,7 @@ in
       pkg-config
       rust-analyzer
       wrapGAppsHook4
-      appstream-glib
+      appstream
       desktop-file-utils
       rustPlatform.cargoSetupHook
     ];

@@ -1,5 +1,5 @@
 {
-    "id": "com.belmoussaoui.GtkRustTemplate.Devel",
+    "id": "com.belmoussaoui.GtkRustTemplate",
     "runtime": "org.gnome.Platform",
     "runtime-version": "49",
     "sdk": "org.gnome.Sdk",
@@ -19,9 +19,7 @@
     ],
     "build-options": {
         "append-path": "/usr/lib/sdk/rust-stable/bin:/usr/lib/sdk/llvm21/bin",
-        "build-args": [
-            "--share=network"
-        ],
+        "build-args": ["--share=network"],
         "env": {
             "CARGO_REGISTRIES_CRATES_IO_PROTOCOL": "sparse",
             "CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER": "clang",
@@ -29,19 +27,14 @@
             "CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER": "clang",
             "CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_RUSTFLAGS": "-C link-arg=-fuse-ld=/usr/lib/sdk/rust-stable/bin/mold"
         },
-        "test-args": [
-            "--socket=x11",
-            "--share=network"
-        ]
+        "test-args": ["--socket=x11", "--share=network"]
     },
     "modules": [
         {
             "name": "gtk-rust-template",
             "buildsystem": "meson",
             "run-tests": true,
-            "config-opts": [
-                "-Dprofile=development"
-            ],
+            "config-opts": ["-Dprofile=development"],
             "sources": [
                 {
                     "type": "dir",
@@ -51,4 +44,3 @@
         }
     ]
 }
-

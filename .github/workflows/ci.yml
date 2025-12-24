@@ -10,7 +10,7 @@ jobs:
     name: Rustfmt
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: actions-rs/toolchain@v1
         with:
           profile: minimal
@@ -26,13 +26,12 @@ jobs:
     name: Flatpak
     runs-on: ubuntu-latest
     container:
-      image: bilelmoussaoui/flatpak-github-actions:gnome-46
+      image: ghcr.io/flathub-infra/flatpak-github-actions:gnome-49
       options: --privileged
     steps:
-    - uses: actions/checkout@v4
-    - uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v6
-      with:
-        bundle: gtk-rust-template.flatpak
-        manifest-path: build-aux/com.belmoussaoui.GtkRustTemplate.Devel.json
-        run-tests: true
-        cache-key: flatpak-builder-${{ github.sha }}
+      - uses: actions/checkout@v6
+      - uses: flatpak/flatpak-github-actions/flatpak-builder@v6
+        with:
+          bundle: gtk-rust-template.flatpak
+          manifest-path: build-aux/com.belmoussaoui.GtkRustTemplate.json
+          cache-key: flatpak-builder-${{ github.sha }}

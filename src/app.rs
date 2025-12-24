@@ -1,15 +1,13 @@
 use relm4::{
-    actions::{RelmAction, RelmActionGroup},
+    actions::{AccelsPlus, RelmAction, RelmActionGroup},
     adw, gtk, main_application, Component, ComponentParts, ComponentSender, SimpleComponent,
 };
 
-use gtk::prelude::{
-    ApplicationExt, ApplicationWindowExt, GtkWindowExt, OrientableExt, SettingsExt, WidgetExt,
-};
+use gtk::prelude::{ApplicationExt, GtkWindowExt, OrientableExt, SettingsExt, WidgetExt};
 use gtk::{gio, glib};
 
 use crate::config::{APP_ID, PROFILE};
-use crate::modals::about::AboutDialog;
+use crate::modals::{about::AboutDialog, shortcuts::ShortcutsDialog};
 
 pub(super) struct App {}
 
@@ -22,6 +20,7 @@ relm4::new_action_group!(pub(super) WindowActionGroup, "win");
 relm4::new_stateless_action!(PreferencesAction, WindowActionGroup, "preferences");
 relm4::new_stateless_action!(pub(super) ShortcutsAction, WindowActionGroup, "show-help-overlay");
 relm4::new_stateless_action!(AboutAction, WindowActionGroup, "about");
+relm4::new_stateless_action!(QuitAction, WindowActionGroup, "quit");
 
 #[relm4::component(pub)]
 impl SimpleComponent for App {
@@ -47,16 +46,6 @@ impl SimpleComponent for App {
             connect_close_request[sender] => move |_| {
                 sender.input(AppMsg::Quit);
                 glib::Propagation::Stop
-            },
-
-            #[wrap(Some)]
-            set_help_overlay: shortcuts = &gtk::Builder::from_resource(
-                    "/com/belmoussaoui/GtkRustTemplate/gtk/help-overlay.ui"
-                )
-                .object::<gtk::ShortcutsWindow>("help_overlay")
-                .unwrap() -> gtk::ShortcutsWindow {
-                    set_transient_for: Some(&main_window),
-                    set_application: Some(&main_application()),
             },
 
             add_css_class?: if PROFILE == "Devel" {
@@ -91,15 +80,14 @@ impl SimpleComponent for App {
         sender: ComponentSender<Self>,
     ) -> ComponentParts<Self> {
         let model = Self {};
-
         let widgets = view_output!();
 
+        let app = root.application().unwrap();
         let mut actions = RelmActionGroup::<WindowActionGroup>::new();
 
         let shortcuts_action = {
-            let shortcuts = widgets.shortcuts.clone();
             RelmAction::<ShortcutsAction>::new_stateless(move |_| {
-                shortcuts.present();
+                ShortcutsDialog::builder().launch(()).detach();
             })
         };
 
@@ -109,8 +97,18 @@ impl SimpleComponent for App {
             })
         };
 
+        let quit_action = {
+            RelmAction::<QuitAction>::new_stateless(move |_| {
+                sender.input(AppMsg::Quit);
+            })
+        };
+
+        // Connect action with hotkeys
+        app.set_accelerators_for_action::<QuitAction>(&["<Control>q"]);
+
         actions.add_action(shortcuts_action);
         actions.add_action(about_action);
+        actions.add_action(quit_action);
         actions.register_for_widget(&widgets.main_window);
 
         widgets.load_window_size();
