@@ -2,15 +2,15 @@
 name = "gtk-rust-template"
 version = "0.1.0"
 authors = ["Bilal Elmoussaoui <bil.elmoussaoui@gmail.com>"]
-edition = "2021"
+edition = "2024"
 publish = false
+rust-version = "1.92"
 
 [profile.release]
 lto = true
 
 [dependencies]
 gettext-rs = { version = "0.7.7", features = ["gettext-system"] }
-relm4 = { version = "0.10.0", features = ["libadwaita", "gnome_48"] }
-adw = { version = "0.8.1", package = "libadwaita", features = ["v1_8"] }
+relm4 = { version = "0.10.1", features = ["libadwaita", "gnome_49"] }
 tracing = "0.1.44"
 tracing-subscriber = "0.3.22"
