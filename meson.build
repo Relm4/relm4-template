@@ -2,7 +2,7 @@ project(
   'gtk-rust-template',
   'rust',
   version: '0.1.0',
-  meson_version: '>= 1.10.1',
+  meson_version: '>= 1.9.2',
   # license: 'MIT',
 )
 
