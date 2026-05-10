@@ -2,7 +2,7 @@ project(
   'gtk-rust-template',
   'rust',
   version: '0.1.0',
-  meson_version: '>= 0.59',
+  meson_version: '>= 1.9.2',
   # license: 'MIT',
 )
 
@@ -11,9 +11,9 @@ gnome = import('gnome')
 
 base_id = 'com.belmoussaoui.GtkRustTemplate'
 
-dependency('glib-2.0', version: '>= 2.66')
-dependency('gio-2.0', version: '>= 2.66')
-dependency('gtk4', version: '>= 4.0.0')
+dependency('glib-2.0', version: '>= 2.86.3')
+dependency('gio-2.0', version: '>= 2.86.3')
+dependency('gtk4', version: '>= 4.20.3')
 
 find_program('glib-compile-resources')
 glib_compile_schemas = find_program('glib-compile-schemas')

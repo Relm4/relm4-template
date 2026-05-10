@@ -65,7 +65,7 @@ flatpak install --user org.gnome.Sdk//49 org.gnome.Platform//49  org.freedesktop
 flatpak-builder --user flatpak_app build-aux/<application_id>.Devel.json
 ```
 
-### NixOS 
+### NixOS
 ```bash
 nix build . --show-trace
 ```
@@ -80,9 +80,9 @@ flatpak-builder --run flatpak_app build-aux/<application_id>.Devel.json <project
 
 ### NixOS
 ```bash
-nix run 
-# or
-cd .. && ./relm4-template/result/bin/gtk-rust-template
+nix run
+# or with meson
+meson setup builddir -Dprofile=development --prefix=~/.local && meson install -C builddir && ~/.local/bin/gtk-rust-template
 ```
 
 ## Translations with Gettext

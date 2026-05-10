@@ -1,6 +1,7 @@
 use relm4::{
+    Component, ComponentParts, ComponentSender, SimpleComponent,
     actions::{AccelsPlus, RelmAction, RelmActionGroup},
-    adw, gtk, main_application, Component, ComponentParts, ComponentSender, SimpleComponent,
+    adw, gtk, main_application,
 };
 
 use gtk::prelude::{ApplicationExt, GtkWindowExt, OrientableExt, SettingsExt, WidgetExt};
