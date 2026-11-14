@@ -14,6 +14,14 @@ use app::App;
 relm4::new_action_group!(AppActionGroup, "app");
 relm4::new_stateless_action!(QuitAction, AppActionGroup, "quit");
 
+fn setup_gettext() {
+    unsafe {
+        gettextrs::setlocale(LocaleCategory::LcAll, "");
+    };
+    gettextrs::bindtextdomain(GETTEXT_PACKAGE, LOCALEDIR).expect("Unable to bind the text domain");
+    gettextrs::textdomain(GETTEXT_PACKAGE).expect("Unable to switch to the text domain");
+}
+
 fn main() {
     gtk::init().unwrap();
 
@@ -23,10 +31,7 @@ fn main() {
         .with_max_level(tracing::Level::INFO)
         .init();
 
-    // setup gettext
-    gettextrs::setlocale(LocaleCategory::LcAll, "");
-    gettextrs::bindtextdomain(GETTEXT_PACKAGE, LOCALEDIR).expect("Unable to bind the text domain");
-    gettextrs::textdomain(GETTEXT_PACKAGE).expect("Unable to switch to the text domain");
+    setup_gettext();
 
     glib::set_application_name(&gettext("GTK Rust Template"));
 
