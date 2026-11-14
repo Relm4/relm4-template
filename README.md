@@ -85,6 +85,14 @@ nix run
 meson setup builddir -Dprofile=development --prefix=~/.local && meson install -C builddir && ~/.local/bin/gtk-rust-template
 ```
 
+### Justfile
+```bash
+just run
+
+## see available commands
+just --list
+```
+
 ## Translations with Gettext
 
 The template uses `gettext` as a framework for translations using [`gettext-rs`](https://github.com/gettext-rs/gettext-rs). The basic files for this can be found in the `po` folder.

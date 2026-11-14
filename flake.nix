@@ -100,7 +100,11 @@
             clippy
             rust-analyzer
             cargo-watch
-
+            flatpak-builder
+            just
+            just-lsp
+            bacon
+            
             openssl
             # Gnome related
             gtk4
